@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A2 Outdoor Services</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7f3;color:#142015}
+header{background:#102714;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.logo{font-size:24px;font-weight:900}nav a{color:white;text-decoration:none;margin-left:18px;font-weight:700}
+.hero{padding:70px 7%;background:linear-gradient(135deg,#153b1b,#2f7438);color:white}
+.hero h1{font-size:48px;margin:0 0 12px}.hero p{font-size:19px;max-width:650px}
+.btn{display:inline-block;padding:13px 18px;border-radius:10px;border:0;background:#e8f5e8;color:#143116;font-weight:800;text-decoration:none;cursor:pointer;margin:5px}
+.btn.dark{background:#102714;color:white}.btn.gold{background:#f2c94c;color:#18140a}
+section{padding:45px 7%;max-width:1200px;margin:auto}.title{text-align:center;margin-bottom:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:white;border-radius:16px;padding:22px;box-shadow:0 5px 18px #00000012}.price{font-size:28px;font-weight:900}
+input,select,textarea{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #ccd4ca;border-radius:9px}
+label{font-weight:700;font-size:14px}.notice{padding:14px;border-radius:10px;background:#eef6ee;margin:10px 0}
+.small{font-size:13px;color:#5b665b}
+footer{background:#102714;color:white;text-align:center;padding:30px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:20px;overflow:auto}.modalbox{background:white;max-width:600px;margin:5% auto;padding:25px;border-radius:16px}
+#dashboard{display:none}
+@media(max-width:650px){.hero h1{font-size:36px}nav{display:none}}
+</style>
+</head>
+<body>
+<header><div class="logo">A2 Outdoor Services</div><nav>
+<a href="#services">Services</a><a href="#book">Book</a><a href="#reviews">Reviews</a><a href="#account">Account</a>
+</nav></header>
+
+<div class="hero">
+<h1>Clean yards. Clean rides.</h1>
+<p>Lawn mowing, edging and car washing from A2 Outdoor Services. Simple booking, clear prices and easy contact.</p>
+<a class="btn gold" href="#book">Book a Service</a>
+<a class="btn" href="tel:+13252062463">Call / Text</a>
+<a class="btn" href="https://instagram.com/a2outdoorservices" target="_blank">Instagram</a>
+</div>
+
+<section id="services"><div class="title"><h2>Services & Pricing</h2><p>Affordable local service</p></div>
+<div class="grid">
+<div class="card"><h3>🌱 Lawn Mowing</h3><div class="price">$20</div></div>
+<div class="card"><h3>✂️ Edging</h3><div class="price">$15</div></div>
+<div class="card"><h3>🌱 Lawn + Edging</h3><div class="price">$35</div></div>
+<div class="card"><h3>🚗 Car Wash</h3><div class="price">$25</div></div>
+<div class="card"><h3>🔥 Complete Package</h3><div class="price">$60</div><p>Lawn mowing + edging + car wash</p></div>
+</div></section>
+
+<section id="book"><div class="title"><h2>Book Your Service</h2><p>Pick a service and an available time</p></div>
+<div class="card">
+<form id="bookingForm">
+<label>Service</label><select id="service">
+<option value="Lawn Mowing|20">Lawn Mowing — $20</option>
+<option value="Edging|15">Edging — $15</option>
+<option value="Lawn + Edging|35">Lawn + Edging — $35</option>
+<option value="Car Wash|25">Car Wash — $25</option>
+<option value="Complete Package|60">Complete Package — $60</option>
+</select>
+<label>Date</label><input id="date" type="date" required>
+<label>Time</label><select id="time" required></select>
+<label>Name</label><input id="name" required>
+<label>Phone</label><input id="phone" type="tel" required>
+<label>Address / Service Location</label><textarea id="address" required></textarea>
+<button class="btn dark" type="submit">Request Booking</button>
+</form>
+<div id="bookMsg"></div>
+<p class="small">Online payment and automated SMS notifications need a payment/SMS provider connection before they can process real transactions or texts.</p>
+</div></section>
+
+<section id="account"><div class="title"><h2>Customer Account</h2><p>Keep track of bookings and payments</p></div>
+<div class="grid">
+<div class="card"><h3>Create / Sign In</h3><input id="email" type="email" placeholder="Email"><input id="pw" type="password" placeholder="Password"><button class="btn dark" onclick="login()">Sign In / Create</button><div id="loginMsg"></div></div>
+<div class="card"><h3>My Bookings</h3><div id="myBookings">Sign in to see your bookings.</div></div>
+</div></section>
+
+<section id="reviews"><div class="title"><h2>Customer Reviews</h2><p>Real reviews can be added here after jobs are completed</p></div>
+<div id="reviewsBox" class="grid"></div>
+<div class="card"><h3>Leave a Review</h3><input id="reviewName" placeholder="Your name"><select id="stars"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select><textarea id="reviewText" placeholder="How did we do?"></textarea><button class="btn dark" onclick="addReview()">Post Review</button></div>
+</section>
+
+<section><div class="title"><h2>FAQ</h2></div>
+<div class="grid"><div class="card"><b>What if it rains?</b><p>Outdoor jobs can be rescheduled for safer weather.</p></div>
+<div class="card"><b>How do I reschedule?</b><p>Use your account or contact A2 directly.</p></div>
+<div class="card"><b>Where do you service?</b><p>Set your service area in the admin settings.</p></div>
+<div class="card"><b>Need a custom quote?</b><p>Call or text (325) 206-2463.</p></div></div></section>
+
+<section id="ownerLogin" style="display:none"><div class="title"><h2>Owner Login</h2><p>Private business controls</p></div>
+<div class="card">
+<p class="small">Private owner area. Customers do not see the dashboard.</p>
+<label>Admin PIN</label><input id="adminPin" type="password" inputmode="numeric" autocomplete="off"><button class="btn dark" onclick="adminLogin()">Open Dashboard</button><div id="adminMsg"></div>
+<div id="dashboard">
+<hr><h3>Availability</h3>
+<label>Available days</label><input id="days" value="Mon,Tue,Wed,Thu,Fri,Sat">
+<label>Available hours</label><input id="hours" value="9:00 AM,10:00 AM,11:00 AM,12:00 PM,1:00 PM,2:00 PM,3:00 PM,4:00 PM,5:00 PM">
+<button class="btn dark" onclick="saveAvailability()">Save Availability</button>
+<h3>Promo Code</h3><input id="promo" placeholder="Example: A2SAVE10"><input id="discount" type="number" placeholder="Discount %"><button class="btn dark" onclick="savePromo()">Save Promo</button>
+<h3>Bookings</h3><div id="allBookings"></div>
+</div></div></section>
+
+<footer><b id="ownerTrigger" style="cursor:default">A2 Outdoor Services</b><p>Lawn mowing • Edging • Car washing</p><p>📞 (325) 206-2463 &nbsp; | &nbsp; 📸 @a2outdoorservices</p></footer>
+
+<div class="modal" id="payModal"><div class="modalbox"><h2>Payment</h2><p>Payment is ready to connect to a real payment provider.</p><p class="notice">No card information is collected by this demo.</p><button class="btn dark" onclick="closePay()">Close</button></div></div>
+
+<script>
+const KEY='a2data';
+let data=JSON.parse(localStorage.getItem(KEY)||'{"users":{},"bookings":[],"reviews":[],"availability":{"days":["Mon","Tue","Wed","Thu","Fri","Sat"],"hours":["9:00 AM","10:00 AM","11:00 AM","12:00 PM","1:00 PM","2:00 PM","3:00 PM","4:00 PM","5:00 PM"]},"promo":null}');
+let currentUser=null;
+function save(){localStorage.setItem(KEY,JSON.stringify(data))}
+function fillTimes(){let s=document.getElementById('time');s.innerHTML='';data.availability.hours.forEach(x=>{let o=document.createElement('option');o.textContent=x;o.value=x;s.appendChild(o)})}
+fillTimes();
+document.getElementById('date').min=new Date().toISOString().split('T')[0];
+document.getElementById('date').addEventListener('change',e=>{
+ let d=new Date(e.target.value+'T12:00:00'), day=d.toLocaleDateString('en-US',{weekday:'short'});
+ document.getElementById('time').disabled=!data.availability.days.includes(day);
+ document.getElementById('bookMsg').innerHTML=data.availability.days.includes(day)?'<div class="notice">Times shown are currently available.</div>':'<div class="notice">A2 is not marked available that day. Pick another date.</div>';
+});
+function login(){
+ let e=document.getElementById('email').value.trim().toLowerCase(),p=document.getElementById('pw').value;
+ if(!e||!p)return;
+ if(!data.users[e]) data.users[e]={password:p,bookings:[]};
+ if(data.users[e].password!==p){document.getElementById('loginMsg').textContent='Wrong password';return}
+ currentUser=e; save(); document.getElementById('loginMsg').textContent='Signed in'; renderMine();
+}
+function renderMine(){
+ let b=data.bookings.filter(x=>x.email===currentUser);
+ document.getElementById('myBookings').innerHTML=b.length?b.map(x=>`<div class="notice"><b>${x.service}</b><br>${x.date} at ${x.time}<br>$${x.price}<br>Status: ${x.status}</div>`).join(''):'No bookings yet';
+}
+document.getElementById('bookingForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ let [service,price]=document.getElementById('service').value.split('|');
+ let date=document.getElementById('date').value;
+ let day=new Date(date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short'});
+ if(!data.availability.days.includes(day)){alert('That day is not available');return}
+ let x={id:Date.now(),email:currentUser||document.getElementById('phone').value,service,price,date,time:document.getElementById('time').value,name:document.getElementById('name').value,phone:document.getElementById('phone').value,address:document.getElementById('address').value,status:'Pending'};
+ data.bookings.push(x);save();
+ if(currentUser){data.users[currentUser].bookings.push(x.id);save();renderMine()}
+ document.getElementById('bookMsg').innerHTML='<div class="notice"><b>Booking request sent.</b> A2 can confirm it by phone/text.</div>';
+ e.target.reset(); fillTimes();
+});
+function adminLogin(){
+ const pin=document.getElementById('adminPin').value;
+ if(pin!=='2463'){
+   document.getElementById('adminMsg').innerHTML='<div class="notice">Incorrect PIN</div>';
+   return;
+ }
+ document.getElementById('dashboard').style.display='block';
+ document.getElementById('adminMsg').innerHTML='<div class="notice">Owner dashboard unlocked</div>';
+ renderAdmin();
+}
+function saveAvailability(){
+ data.availability.days=document.getElementById('days').value.split(',').map(x=>x.trim()).filter(Boolean);
+ data.availability.hours=document.getElementById('hours').value.split(',').map(x=>x.trim()).filter(Boolean);
+ save();fillTimes();alert('Availability saved');
+}
+function savePromo(){data.promo={code:document.getElementById('promo').value,discount:document.getElementById('discount').value};save();alert('Promo saved')}
+function renderAdmin(){document.getElementById('allBookings').innerHTML=data.bookings.length?data.bookings.map(x=>`<div class="notice"><b>${x.name}</b> • ${x.service} • $${x.price}<br>${x.date} ${x.time}<br>${x.phone}<br>${x.address}<br><select onchange="setStatus(${x.id},this.value)"><option ${x.status==='Pending'?'selected':''}>Pending</option><option ${x.status==='Confirmed'?'selected':''}>Confirmed</option><option ${x.status==='Completed'?'selected':''}>Completed</option><option ${x.status==='Cancelled'?'selected':''}>Cancelled</option></select></div>`).join(''):'No bookings'}
+function setStatus(id,v){let x=data.bookings.find(b=>b.id===id);if(x){x.status=v;save();renderAdmin();if(currentUser)renderMine()}}
+function addReview(){
+ let n=document.getElementById('reviewName').value.trim(),t=document.getElementById('reviewText').value.trim(),s=document.getElementById('stars').value;
+ if(!n||!t)return;data.reviews.push({n,t,s});save();renderReviews();document.getElementById('reviewText').value='';
+}
+function renderReviews(){document.getElementById('reviewsBox').innerHTML=data.reviews.length?data.reviews.map(r=>`<div class="card"><b>${'★'.repeat(r.s)}</b><p>${r.t}</p><span class="small">— ${r.n}</span></div>`).join(''):'<div class="card">Your first customer reviews will appear here.</div>'}
+function closePay(){document.getElementById('payModal').style.display='none'}
+renderReviews();
+</script>
+
+<script>
+let ownerTaps = 0;
+let ownerTimer;
+const trigger = document.getElementById('ownerTrigger');
+if (trigger) {
+  trigger.addEventListener('click', () => {
+    ownerTaps++;
+    clearTimeout(ownerTimer);
+    ownerTimer = setTimeout(() => ownerTaps = 0, 1800);
+    if (ownerTaps >= 5) {
+      document.getElementById('ownerLogin').style.display = 'block';
+      document.getElementById('ownerLogin').scrollIntoView({behavior:'smooth'});
+      ownerTaps = 0;
+    }
+  });
+}
+</script>
+</body></html>
