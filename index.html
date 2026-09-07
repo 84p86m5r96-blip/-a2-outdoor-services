@@ -112,8 +112,8 @@ footer{background:#102714;color:white;text-align:center;padding:30px}
 <script>
 // Supabase configuration: replace these two public values with your project's URL and anon/publishable key.
 // Never place a Supabase service_role/secret key in this file.
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+const SUPABASE_URL = 'https://nzqywkzkzrlmxebcvgyt.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_AZytif7CNFPBPZ2UGVHi4Q_zyIqDYXj';
 const supabaseConfigured = !SUPABASE_URL.includes('YOUR_') && !SUPABASE_ANON_KEY.includes('YOUR_');
 const sb = supabaseConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
@@ -161,10 +161,19 @@ async function refreshOwnerUI(userArg){
   const dashboard=document.getElementById('dashboard');
   const signOut=document.getElementById('signOutBtn');
   if(user){
-    dashboard.style.display='block';
-    signOut.style.display='inline-block';
-    document.getElementById('signedInEmail').textContent=user.email || '';
-    msg('Owner dashboard unlocked.');
+    const {data:owner,error:ownerError}=await sb.from('owner_access').select('user_id').eq('user_id',user.id).maybeSingle();
+    if(owner && !ownerError){
+      dashboard.style.display='block';
+      signOut.style.display='inline-block';
+      document.getElementById('signedInEmail').textContent=user.email || '';
+      msg('Owner dashboard unlocked.');
+    }else{
+      await sb.auth.signOut();
+      dashboard.style.display='none';
+      signOut.style.display='none';
+      document.getElementById('signedInEmail').textContent='';
+      msg('This account is not authorized as the owner.');
+    }
   }else{
     dashboard.style.display='none';
     signOut.style.display='none';
