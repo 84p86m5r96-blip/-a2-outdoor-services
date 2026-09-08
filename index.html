@@ -8,13 +8,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
@@ -55,9 +51,7 @@ nav a{
   font-weight:bold;
 }
 
-nav a:hover{
-  opacity:.75;
-}
+nav a:hover{opacity:.75}
 
 .hero{
   min-height:560px;
@@ -95,26 +89,18 @@ nav a:hover{
   margin:4px;
 }
 
-.btn:hover{
-  filter:brightness(1.1);
-}
+.btn:hover{filter:brightness(1.1)}
 
 .btn.secondary{
   background:#dfe9df;
   color:#142015;
 }
 
-.btn.danger{
-  background:#b3261e;
-}
+.btn.danger{background:#b3261e}
 
-.btn.cash{
-  background:#00a86b;
-}
+.btn.cash{background:#00a86b}
 
-section{
-  padding:70px 7%;
-}
+section{padding:70px 7%}
 
 .section-title{
   text-align:center;
@@ -126,9 +112,7 @@ section{
   margin-bottom:10px;
 }
 
-.section-title p{
-  color:#58635a;
-}
+.section-title p{color:#58635a}
 
 .services{
   display:grid;
@@ -177,9 +161,7 @@ label{
   margin-bottom:7px;
 }
 
-input,
-select,
-textarea{
+input,select,textarea{
   width:100%;
   padding:13px;
   border:1px solid #ccd4cc;
@@ -193,9 +175,7 @@ textarea{
   resize:vertical;
 }
 
-.hidden{
-  display:none !important;
-}
+.hidden{display:none !important}
 
 .notice{
   padding:15px;
@@ -204,13 +184,9 @@ textarea{
   margin:15px 0;
 }
 
-.notice.warning{
-  background:#fff4d6;
-}
+.notice.warning{background:#fff4d6}
 
-.notice.success{
-  background:#e3f6e8;
-}
+.notice.success{background:#e3f6e8}
 
 .booking-list{
   display:grid;
@@ -225,9 +201,7 @@ textarea{
   box-shadow:0 5px 18px rgba(0,0,0,.07);
 }
 
-.booking strong{
-  color:#245d2d;
-}
+.booking strong{color:#245d2d}
 
 .status{
   display:inline-block;
@@ -253,13 +227,9 @@ textarea{
   gap:18px;
 }
 
-.stars{
-  font-size:22px;
-}
+.stars{font-size:22px}
 
-.owner-table-wrap{
-  overflow-x:auto;
-}
+.owner-table-wrap{overflow-x:auto}
 
 table{
   width:100%;
@@ -291,13 +261,9 @@ footer{
   color:#697269;
 }
 
-#paymentDetails{
-  margin-top:15px;
-}
+#paymentDetails{margin-top:15px}
 
-#ownerDashboard{
-  background:#e9efe9;
-}
+#ownerDashboard{background:#e9efe9}
 
 @media(max-width:700px){
   header{
@@ -305,17 +271,11 @@ footer{
     align-items:flex-start;
   }
 
-  nav{
-    gap:12px;
-  }
+  nav{gap:12px}
 
-  section{
-    padding:55px 5%;
-  }
+  section{padding:55px 5%}
 
-  .hero{
-    min-height:500px;
-  }
+  .hero{min-height:500px}
 }
 </style>
 </head>
@@ -334,10 +294,10 @@ footer{
   </nav>
 </header>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <div>
     <h1>A2 Outdoor Services</h1>
+
     <p>
       Reliable outdoor services at affordable prices.
       Book your service today and let A2 handle the work.
@@ -349,7 +309,6 @@ footer{
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
 
   <div class="section-title">
@@ -362,39 +321,30 @@ footer{
     <div class="card">
       <h3>🚗 Car Wash</h3>
       <div class="price">$25</div>
-      <p>
-        Get your car cleaned and looking fresh.
-      </p>
+      <p>Get your car cleaned and looking fresh.</p>
     </div>
 
     <div class="card">
       <h3>🌱 Lawn Mowing</h3>
       <div class="price">$20</div>
-      <p>
-        Keep your lawn clean, neat, and freshly cut.
-      </p>
+      <p>Keep your lawn clean, neat, and freshly cut.</p>
     </div>
 
     <div class="card">
       <h3>✂️ Edging</h3>
       <div class="price">$15</div>
-      <p>
-        Clean edges around your lawn, sidewalks, and driveway.
-      </p>
+      <p>Clean edges around your lawn, sidewalks, and driveway.</p>
     </div>
 
     <div class="card">
       <h3>⭐ Complete Package</h3>
       <div class="price">$60</div>
-      <p>
-        Includes car wash, lawn mowing, and edging.
-      </p>
+      <p>Includes car wash, lawn mowing, and edging.</p>
     </div>
 
   </div>
 </section>
 
-<!-- ACCOUNT -->
 <section id="account">
 
   <div class="section-title">
@@ -414,7 +364,7 @@ footer{
       <label>Password</label>
       <input id="loginPassword" type="password" placeholder="Password">
 
-      <button class="btn" onclick="signIn()">
+      <button class="btn" id="loginButton">
         Sign In
       </button>
 
@@ -428,7 +378,7 @@ footer{
       <label>Password</label>
       <input id="signupPassword" type="password" placeholder="Create a password">
 
-      <button class="btn secondary" onclick="signUp()">
+      <button class="btn secondary" id="signupButton">
         Create Account
       </button>
 
@@ -438,18 +388,18 @@ footer{
 
     <div id="loggedInAccount" class="hidden">
 
-      <h3>You're signed in ✅</h3>
+      <h3>You're signed in</h3>
 
       <p>
         Signed in as:
         <strong id="userEmail"></strong>
       </p>
 
-      <button class="btn" onclick="loadCustomerBookings()">
+      <button class="btn" id="viewAppointmentsButton">
         View My Appointments
       </button>
 
-      <button class="btn secondary" onclick="signOut()">
+      <button class="btn secondary" id="logoutButton">
         Sign Out
       </button>
 
@@ -458,7 +408,6 @@ footer{
   </div>
 </section>
 
-<!-- BOOKING -->
 <section id="booking">
 
   <div class="section-title">
@@ -484,7 +433,8 @@ footer{
       <input id="customerAddress" required placeholder="Address where service is needed">
 
       <label>Service</label>
-      <select id="service" required onchange="updatePaymentDetails()">
+
+      <select id="service" required>
         <option value="">Choose a service</option>
         <option value="Car Wash">Car Wash — $25</option>
         <option value="Lawn Mowing">Lawn Mowing — $20</option>
@@ -499,7 +449,8 @@ footer{
       <input id="appointmentTime" type="text" required placeholder="Example: 3:00 PM">
 
       <label>Payment Method</label>
-      <select id="paymentMethod" required onchange="updatePaymentDetails()">
+
+      <select id="paymentMethod" required>
         <option value="">Choose payment method</option>
         <option value="cash_app">Cash App</option>
         <option value="in_person">Pay in person after work</option>
@@ -518,7 +469,6 @@ footer{
   </div>
 </section>
 
-<!-- CUSTOMER BOOKINGS -->
 <section id="myBookings">
 
   <div class="section-title">
@@ -534,7 +484,6 @@ footer{
 
 </section>
 
-<!-- REVIEWS -->
 <section id="reviews">
 
   <div class="section-title">
@@ -564,6 +513,7 @@ footer{
       <input id="reviewName" required placeholder="Your name">
 
       <label>Rating</label>
+
       <select id="reviewStars" required>
         <option value="">Choose rating</option>
         <option value="5">★★★★★ — 5 stars</option>
@@ -574,7 +524,12 @@ footer{
       </select>
 
       <label>Review</label>
-      <textarea id="reviewText" required placeholder="Tell us about your experience"></textarea>
+
+      <textarea
+        id="reviewText"
+        required
+        placeholder="Tell us about your experience"
+      ></textarea>
 
       <button class="btn" type="submit">
         Submit Review
@@ -588,7 +543,6 @@ footer{
 
 </section>
 
-<!-- OWNER DASHBOARD -->
 <section id="ownerDashboard" class="hidden">
 
   <div class="section-title">
@@ -606,11 +560,11 @@ footer{
     <label>Password</label>
     <input id="ownerPassword" type="password" placeholder="Password">
 
-    <button class="btn" onclick="ownerLogin()">
+    <button class="btn" id="ownerLoginButton">
       Owner Sign In
     </button>
 
-    <button class="btn secondary" onclick="closeOwnerDashboard()">
+    <button class="btn secondary" id="closeOwnerButton">
       Close
     </button>
 
@@ -626,11 +580,11 @@ footer{
 
       <h3>All Appointments</h3>
 
-      <button class="btn" onclick="loadOwnerBookings()">
+      <button class="btn" id="refreshOwnerButton">
         Refresh Appointments
       </button>
 
-      <button class="btn secondary" onclick="ownerSignOut()">
+      <button class="btn secondary" id="ownerLogoutButton">
         Owner Sign Out
       </button>
 
@@ -672,10 +626,10 @@ const supabaseClient =
 ========================================= */
 
 const SERVICE_PRICES = {
-  "Car Wash": 25,
-  "Lawn Mowing": 20,
-  "Edging": 15,
-  "Complete Package": 60
+  "Car Wash":25,
+  "Lawn Mowing":20,
+  "Edging":15,
+  "Complete Package":60
 };
 
 
@@ -699,7 +653,20 @@ function escapeHTML(value){
 
 
 /* =========================================
-   ACCOUNT SIGN UP
+   MESSAGE HELPER
+========================================= */
+
+function showMessage(element,text,type="warning"){
+
+  element.innerHTML =
+    '<div class="notice '+type+'">'+
+    escapeHTML(text)+
+    '</div>';
+}
+
+
+/* =========================================
+   SIGN UP
 ========================================= */
 
 async function signUp(){
@@ -715,45 +682,71 @@ async function signUp(){
 
   if(!email || !password){
 
-    message.innerHTML =
-      '<div class="notice warning">Enter your email and password.</div>';
+    showMessage(
+      message,
+      "Enter your email and password."
+    );
 
     return;
   }
 
-  const {data,error} =
-    await supabaseClient.auth.signUp({
-      email:email,
-      password:password
-    });
+  if(password.length < 6){
 
-  if(error){
-
-    message.innerHTML =
-      '<div class="notice warning">' +
-      escapeHTML(error.message) +
-      '</div>';
+    showMessage(
+      message,
+      "Password must be at least 6 characters."
+    );
 
     return;
   }
 
-  if(data.session){
+  message.innerHTML =
+    '<div class="notice">Creating account...</div>';
 
-    message.innerHTML =
-      '<div class="notice success">Account created and signed in!</div>';
+  try{
 
-  }else{
+    const {data,error} =
+      await supabaseClient.auth.signUp({
+        email:email,
+        password:password
+      });
 
-    message.innerHTML =
-      '<div class="notice success">' +
-      'Account created! Check your email if confirmation is required, then sign in.' +
-      '</div>';
+    if(error){
+      showMessage(message,error.message);
+      return;
+    }
+
+    if(data.session){
+
+      showMessage(
+        message,
+        "Account created and signed in!",
+        "success"
+      );
+
+      updateAccountUI(data.user);
+
+    }else{
+
+      showMessage(
+        message,
+        "Account created. Check your email if email confirmation is required.",
+        "success"
+      );
+    }
+
+  }catch(error){
+
+    showMessage(
+      message,
+      error.message || "Something went wrong."
+    );
   }
 }
 
 
 /* =========================================
-   ACCOUNT SIGN IN
+   SIGN IN
 ========================================= */
 
 async function signIn(){
@@ -769,32 +762,50 @@ async function signIn(){
 
   if(!email || !password){
 
-    message.innerHTML =
-      '<div class="notice warning">Enter your email and password.</div>';
-
-    return;
-  }
-
-  const {data,error} =
-    await supabaseClient.auth.signInWithPassword({
-      email:email,
-      password:password
-    });
-
-  if(error){
-
-    message.innerHTML =
-      '<div class="notice warning">' +
-      escapeHTML(error.message) +
-      '</div>';
+    showMessage(
+      message,
+      "Enter your email and password."
+    );
 
     return;
   }
 
   message.innerHTML =
-    '<div class="notice success">Signed in successfully!</div>';
+    '<div class="notice">Signing in...</div>';
 
-  updateAccountUI(data.user);
+  try{
+
+    const {data,error} =
+      await supabaseClient.auth.signInWithPassword({
+        email:email,
+        password:password
+      });
+
+    if(error){
+
+      showMessage(
+        message,
+        error.message
+      );
+
+      return;
+    }
+
+    showMessage(
+      message,
+      "Signed in successfully!",
+      "success"
+    );
+
+    updateAccountUI(data.user);
+
+  }catch(error){
+
+    showMessage(
+      message,
+      error.message || "Something went wrong."
+    );
+  }
 }
 
 
@@ -804,7 +815,14 @@ async function signIn(){
 
 async function signOut(){
 
-  await supabaseClient.auth.signOut();
+  const {error} =
+    await supabaseClient.auth.signOut();
+
+  if(error){
+
+    alert(error.message);
+    return;
+  }
 
   updateAccountUI(null);
 
@@ -895,6 +913,7 @@ function updatePaymentDetails(){
 
     box.innerHTML = `
       <div class="notice success">
+
         <strong>Cash App Payment</strong><br><br>
 
         Amount to send:
@@ -903,11 +922,16 @@ function updatePaymentDetails(){
         Cash App:
         <strong>$Txaaden</strong><br><br>
 
-        <a href="https://cash.app/$Txaaden">
+        <a
+          href="https://cash.app/$Txaaden"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <button type="button" class="btn cash">
             Open Cash App
           </button>
         </a>
+
       </div>
     `;
 
@@ -915,10 +939,12 @@ function updatePaymentDetails(){
 
     box.innerHTML = `
       <div class="notice">
+
         <strong>Pay in Person</strong><br><br>
 
         Amount due after the work:
         <strong>$${price}</strong>
+
       </div>
     `;
 
@@ -926,8 +952,10 @@ function updatePaymentDetails(){
 
     box.innerHTML = `
       <div class="notice">
+
         Service price:
         <strong>$${price}</strong>
+
       </div>
     `;
   }
@@ -938,58 +966,76 @@ function updatePaymentDetails(){
    CREATE BOOKING
 ========================================= */
 
-document
-  .getElementById("bookingForm")
-  .addEventListener("submit", async function(event){
+async function createBooking(event){
 
-    event.preventDefault();
+  event.preventDefault();
 
-    const message =
-      document.getElementById("bookingMessage");
+  const message =
+    document.getElementById("bookingMessage");
 
-    const {
-      data:{user}
-    } = await supabaseClient.auth.getUser();
+  const {
+    data:{user}
+  } =
+    await supabaseClient.auth.getUser();
 
-    if(!user){
+  if(!user){
 
-      message.innerHTML =
-        '<div class="notice warning">Please sign in first.</div>';
+    showMessage(
+      message,
+      "Please sign in first."
+    );
 
-      return;
-    }
+    return;
+  }
 
-    const name =
-      document.getElementById("customerName").value.trim();
+  const name =
+    document.getElementById("customerName").value.trim();
 
-    const phone =
-      document.getElementById("customerPhone").value.trim();
+  const phone =
+    document.getElementById("customerPhone").value.trim();
 
-    const address =
-      document.getElementById("customerAddress").value.trim();
+  const address =
+    document.getElementById("customerAddress").value.trim();
 
-    const service =
-      document.getElementById("service").value;
+  const service =
+    document.getElementById("service").value;
 
-    const appointmentDate =
-      document.getElementById("appointmentDate").value;
+  const appointmentDate =
+    document.getElementById("appointmentDate").value;
 
-    const appointmentTime =
-      document.getElementById("appointmentTime").value.trim();
+  const appointmentTime =
+    document.getElementById("appointmentTime").value.trim();
 
-    const paymentMethod =
-      document.getElementById("paymentMethod").value;
+  const paymentMethod =
+    document.getElementById("paymentMethod").value;
 
-    const price =
-      SERVICE_PRICES[service];
+  const price =
+    SERVICE_PRICES[service];
 
-    if(!price){
+  if(!price){
 
-      message.innerHTML =
-        '<div class="notice warning">Choose a valid service.</div>';
+    showMessage(
+      message,
+      "Choose a valid service."
+    );
 
-      return;
-    }
+    return;
+  }
+
+  if(!paymentMethod){
+
+    showMessage(
+      message,
+      "Choose a payment method."
+    );
+
+    return;
+  }
+
+  message.innerHTML =
+    '<div class="notice">Submitting appointment...</div>';
+
+  try{
 
     const {data,error} =
       await supabaseClient
@@ -1012,17 +1058,18 @@ document
 
     if(error){
 
-      message.innerHTML =
-        '<div class="notice warning">' +
-        escapeHTML(error.message) +
-        '</div>';
+      showMessage(
+        message,
+        error.message
+      );
 
       return;
     }
 
     message.innerHTML = `
       <div class="notice success">
-        <strong>Appointment requested! ✅</strong><br><br>
+
+        <strong>Appointment requested!</strong><br><br>
 
         Service:
         <strong>${escapeHTML(service)}</strong><br>
@@ -1038,6 +1085,7 @@ document
 
         Your appointment is currently
         <strong>pending confirmation</strong>.
+
       </div>
     `;
 
@@ -1046,7 +1094,15 @@ document
     document.getElementById("paymentDetails").innerHTML = "";
 
     loadCustomerBookings();
-  });
+
+  }catch(error){
+
+    showMessage(
+      message,
+      error.message || "Something went wrong."
+    );
+  }
+}
 
 
 /* =========================================
@@ -1060,7 +1116,8 @@ async function loadCustomerBookings(){
 
   const {
     data:{user}
-  } = await supabaseClient.auth.getUser();
+  } =
+    await supabaseClient.auth.getUser();
 
   if(!user){
 
@@ -1069,6 +1126,9 @@ async function loadCustomerBookings(){
 
     return;
   }
+
+  box.innerHTML =
+    '<div class="notice">Loading appointments...</div>';
 
   const {data,error} =
     await supabaseClient
@@ -1079,10 +1139,10 @@ async function loadCustomerBookings(){
 
   if(error){
 
-    box.innerHTML =
-      '<div class="notice warning">' +
-      escapeHTML(error.message) +
-      '</div>';
+    showMessage(
+      box,
+      error.message
+    );
 
     return;
   }
@@ -1090,7 +1150,7 @@ async function loadCustomerBookings(){
   if(!data || data.length === 0){
 
     box.innerHTML =
-      '<div class="notice">You don't have any appointments yet.</div>';
+      '<div class="notice">You don\'t have any appointments yet.</div>';
 
     return;
   }
@@ -1098,10 +1158,14 @@ async function loadCustomerBookings(){
   box.innerHTML =
     data.map(booking => {
 
-      let paymentText =
+      const paymentText =
         booking.payment_method === "cash_app"
           ? "Cash App"
           : "Pay in person";
+
+      const canChange =
+        booking.booking_status !== "cancelled" &&
+        booking.booking_status !== "completed";
 
       return `
         <div class="booking">
@@ -1150,20 +1214,21 @@ async function loadCustomerBookings(){
           </p>
 
           ${
-            booking.booking_status !== "cancelled" &&
-            booking.booking_status !== "completed"
+            canChange
             ? `
               <br>
 
               <button
                 class="btn"
-                onclick="rescheduleBooking('${booking.id}')">
+                onclick="rescheduleBooking('${escapeHTML(booking.id)}')"
+              >
                 Reschedule
               </button>
 
               <button
                 class="btn danger"
-                onclick="cancelBooking('${booking.id}')">
+                onclick="cancelBooking('${escapeHTML(booking.id)}')"
+              >
                 Cancel Appointment
               </button>
             `
@@ -1178,20 +1243,24 @@ async function loadCustomerBookings(){
 
 
 /* =========================================
-   RESCHEDULE BOOKING
+   RESCHEDULE
 ========================================= */
 
 async function rescheduleBooking(id){
 
   const newDate =
-    prompt("Enter your new appointment date (YYYY-MM-DD):");
+    prompt(
+      "Enter your new appointment date YYYY-MM-DD:"
+    );
 
   if(!newDate){
     return;
   }
 
   const newTime =
-    prompt("Enter your new appointment time (example: 3:00 PM):");
+    prompt(
+      "Enter your new appointment time example 3:00 PM:"
+    );
 
   if(!newTime){
     return;
@@ -1199,7 +1268,8 @@ async function rescheduleBooking(id){
 
   const {
     data:{user}
-  } = await supabaseClient.auth.getUser();
+  } =
+    await supabaseClient.auth.getUser();
 
   if(!user){
 
@@ -1229,8 +1299,7 @@ async function rescheduleBooking(id){
   }
 
   alert(
-    "Your appointment was rescheduled. " +
-    "It is pending confirmation."
+    "Your appointment was rescheduled. It is pending confirmation."
   );
 
   loadCustomerBookings();
@@ -1238,7 +1307,7 @@ async function rescheduleBooking(id){
 
 
 /* =========================================
-   CANCEL BOOKING
+   CANCEL
 ========================================= */
 
 async function cancelBooking(id){
@@ -1254,7 +1323,8 @@ async function cancelBooking(id){
 
   const {
     data:{user}
-  } = await supabaseClient.auth.getUser();
+  } =
+    await supabaseClient.auth.getUser();
 
   if(!user){
 
@@ -1304,10 +1374,10 @@ async function loadReviews(){
 
   if(error){
 
-    box.innerHTML =
-      '<div class="notice warning">' +
-      escapeHTML(error.message) +
-      '</div>';
+    showMessage(
+      box,
+      error.message
+    );
 
     return;
   }
@@ -1323,9 +1393,18 @@ async function loadReviews(){
   box.innerHTML =
     data.map(review => {
 
+      const rating =
+        Math.max(
+          0,
+          Math.min(
+            5,
+            Number(review.stars) || 0
+          )
+        );
+
       const stars =
-        "★".repeat(Number(review.stars)) +
-        "☆".repeat(5 - Number(review.stars));
+        "★".repeat(rating) +
+        "☆".repeat(5-rating);
 
       return `
         <div class="review">
@@ -1353,65 +1432,542 @@ async function loadReviews(){
    SUBMIT REVIEW
 ========================================= */
 
-document
-  .getElementById("reviewForm")
-  .addEventListener("submit", async function(event){
+async function submitReview(event){
 
-    event.preventDefault();
+  event.preventDefault();
 
-    const message =
-      document.getElementById("reviewMessage");
+  const message =
+    document.getElementById("reviewMessage");
 
-    const {
-      data:{user}
-    } = await supabaseClient.auth.getUser();
+  const {
+    data:{user}
+  } =
+    await supabaseClient.auth.getUser();
 
-    if(!user){
+  if(!user){
 
-      message.innerHTML =
-        '<div class="notice warning">Please sign in first.</div>';
+    showMessage(
+      message,
+      "Please sign in first."
+    );
 
-      return;
-    }
+    return;
+  }
 
-    const name =
-      document.getElementById("reviewName").value.trim();
+  const name =
+    document.getElementById("reviewName").value.trim();
 
-    const stars =
-      Number(document.getElementById("reviewStars").value);
+  const stars =
+    Number(
+      document.getElementById("reviewStars").value
+    );
 
-    const reviewText =
-      document.getElementById("reviewText").value.trim();
+  const reviewText =
+    document.getElementById("reviewText").value.trim();
 
-    const {error} =
-      await supabaseClient
-        .from("reviews")
-        .insert({
-          user_id:user.id,
-          name:name,
-          stars:stars,
-          review_text:reviewText
-        });
+  if(!name || !stars || !reviewText){
 
-    if(error){
+    showMessage(
+      message,
+      "Please complete every field."
+    );
 
-      message.innerHTML =
-        '<div class="notice warning">' +
-        escapeHTML(error.message) +
-        '</div>';
+    return;
+  }
 
-      return;
-    }
+  const {error} =
+    await supabaseClient
+      .from("reviews")
+      .insert({
+        user_id:user.id,
+        name:name,
+        stars:stars,
+        review_text:reviewText
+      });
 
-    message.innerHTML =
-      '<div class="notice success">Review submitted! ⭐</div>';
+  if(error){
 
-    document.getElementById("reviewForm").reset();
+    showMessage(
+      message,
+      error.message
+    );
 
-    loadReviews();
-  });
+    return;
+  }
+
+  showMessage(
+    message,
+    "Review submitted!",
+    "success"
+  );
+
+  document.getElementById("reviewForm").reset();
+
+  loadReviews();
+}
 
 
 /* =========================================
    OWNER DASHBOARD
 ========================================= */
+
+function openOwnerDashboard(){
+
+  document
+    .getElementById("ownerDashboard")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("ownerDashboard")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+}
+
+
+function closeOwnerDashboard(){
+
+  document
+    .getElementById("ownerDashboard")
+    .classList.add("hidden");
+
+  document
+    .getElementById("ownerPanel")
+    .classList.add("hidden");
+}
+
+
+async function ownerLogin(){
+
+  const email =
+    document.getElementById("ownerEmail").value.trim();
+
+  const password =
+    document.getElementById("ownerPassword").value;
+
+  const message =
+    document.getElementById("ownerMessage");
+
+  if(!email || !password){
+
+    showMessage(
+      message,
+      "Enter the owner email and password."
+    );
+
+    return;
+  }
+
+  message.innerHTML =
+    '<div class="notice">Signing in...</div>';
+
+  const {data,error} =
+    await supabaseClient.auth.signInWithPassword({
+      email:email,
+      password:password
+    });
+
+  if(error){
+
+    showMessage(
+      message,
+      error.message
+    );
+
+    return;
+  }
+
+  /*
+    IMPORTANT
+
+    The Supabase database RLS policies should control
+    which authenticated user can read or modify all bookings.
+
+    Do not put a Supabase service role key in this website.
+  */
+
+  message.innerHTML =
+    '<div class="notice success">Owner signed in.</div>';
+
+  document
+    .getElementById("ownerPanel")
+    .classList.remove("hidden");
+
+  loadOwnerBookings();
+}
+
+
+async function ownerSignOut(){
+
+  await supabaseClient.auth.signOut();
+
+  document
+    .getElementById("ownerPanel")
+    .classList.add("hidden");
+
+  document.getElementById("ownerMessage").innerHTML =
+    '<div class="notice">Owner signed out.</div>';
+}
+
+
+/* =========================================
+   OWNER BOOKINGS
+========================================= */
+
+async function loadOwnerBookings(){
+
+  const box =
+    document.getElementById("ownerBookings");
+
+  box.innerHTML =
+    '<div class="notice">Loading appointments...</div>';
+
+  const {
+    data:{user}
+  } =
+    await supabaseClient.auth.getUser();
+
+  if(!user){
+
+    showMessage(
+      box,
+      "Owner must be signed in."
+    );
+
+    return;
+  }
+
+  const {data,error} =
+    await supabaseClient
+      .from("bookings")
+      .select("*")
+      .order("appointment_date",{ascending:true});
+
+  if(error){
+
+    showMessage(
+      box,
+      error.message
+    );
+
+    return;
+  }
+
+  if(!data || data.length === 0){
+
+    box.innerHTML =
+      '<div class="notice">No appointments found.</div>';
+
+    return;
+  }
+
+  box.innerHTML = `
+    <div class="owner-table-wrap">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Service</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          ${
+            data.map(booking => `
+
+              <tr>
+
+                <td>
+                  <strong>
+                    ${escapeHTML(booking.name)}
+                  </strong><br>
+
+                  ${escapeHTML(booking.phone)}<br>
+
+                  ${escapeHTML(booking.address)}
+                </td>
+
+                <td>
+                  ${escapeHTML(booking.service)}<br>
+                  $${escapeHTML(booking.price)}
+                </td>
+
+                <td>
+                  ${escapeHTML(booking.appointment_date)}
+                </td>
+
+                <td>
+                  ${escapeHTML(booking.appointment_time)}
+                </td>
+
+                <td>
+                  ${escapeHTML(booking.payment_method)}<br>
+                  ${escapeHTML(booking.payment_status)}
+                </td>
+
+                <td>
+                  ${escapeHTML(booking.booking_status)}
+                </td>
+
+                <td>
+
+                  <button
+                    class="btn"
+                    onclick="updateBookingStatus('${escapeHTML(booking.id)}','confirmed')"
+                  >
+                    Confirm
+                  </button>
+
+                  <button
+                    class="btn secondary"
+                    onclick="updateBookingStatus('${escapeHTML(booking.id)}','completed')"
+                  >
+                    Complete
+                  </button>
+
+                  <button
+                    class="btn danger"
+                    onclick="updateBookingStatus('${escapeHTML(booking.id)}','cancelled')"
+                  >
+                    Cancel
+                  </button>
+
+                </td>
+
+              </tr>
+
+            `).join("")
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+  `;
+}
+
+
+/* =========================================
+   UPDATE OWNER BOOKING STATUS
+========================================= */
+
+async function updateBookingStatus(id,status){
+
+  const {error} =
+    await supabaseClient
+      .from("bookings")
+      .update({
+        booking_status:status
+      })
+      .eq("id",id);
+
+  if(error){
+
+    alert(
+      "Couldn't update appointment: " +
+      error.message
+    );
+
+    return;
+  }
+
+  loadOwnerBookings();
+}
+
+
+/* =========================================
+   EVENTS
+========================================= */
+
+document
+  .getElementById("loginButton")
+  .addEventListener(
+    "click",
+    signIn
+  );
+
+
+document
+  .getElementById("signupButton")
+  .addEventListener(
+    "click",
+    signUp
+  );
+
+
+document
+  .getElementById("logoutButton")
+  .addEventListener(
+    "click",
+    signOut
+  );
+
+
+document
+  .getElementById("viewAppointmentsButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      document
+        .getElementById("myBookings")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
+
+      loadCustomerBookings();
+
+    }
+  );
+
+
+document
+  .getElementById("service")
+  .addEventListener(
+    "change",
+    updatePaymentDetails
+  );
+
+
+document
+  .getElementById("paymentMethod")
+  .addEventListener(
+    "change",
+    updatePaymentDetails
+  );
+
+
+document
+  .getElementById("bookingForm")
+  .addEventListener(
+    "submit",
+    createBooking
+  );
+
+
+document
+  .getElementById("reviewForm")
+  .addEventListener(
+    "submit",
+    submitReview
+  );
+
+
+document
+  .getElementById("ownerLoginButton")
+  .addEventListener(
+    "click",
+    ownerLogin
+  );
+
+
+document
+  .getElementById("closeOwnerButton")
+  .addEventListener(
+    "click",
+    closeOwnerDashboard
+  );
+
+
+document
+  .getElementById("ownerLogoutButton")
+  .addEventListener(
+    "click",
+    ownerSignOut
+  );
+
+
+document
+  .getElementById("refreshOwnerButton")
+  .addEventListener(
+    "click",
+    loadOwnerBookings
+  );
+
+
+/* =========================================
+   OWNER DASHBOARD ACCESS
+========================================= */
+
+let logoClicks = 0;
+let logoTimer = null;
+
+document
+  .getElementById("logo")
+  .addEventListener("click",function(){
+
+    logoClicks++;
+
+    clearTimeout(logoTimer);
+
+    logoTimer =
+      setTimeout(function(){
+        logoClicks = 0;
+      },1000);
+
+    if(logoClicks >= 5){
+
+      logoClicks = 0;
+
+      openOwnerDashboard();
+    }
+
+  });
+
+
+/* =========================================
+   AUTH STATE
+========================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  function(event,session){
+
+    updateAccountUI(
+      session ? session.user : null
+    );
+
+  }
+);
+
+
+/* =========================================
+   INITIAL LOAD
+========================================= */
+
+async function initialize(){
+
+  const {
+    data:{session}
+  } =
+    await supabaseClient.auth.getSession();
+
+  updateAccountUI(
+    session ? session.user : null
+  );
+
+  loadReviews();
+
+  const today =
+    new Date().toISOString().split("T")[0];
+
+  document
+    .getElementById("appointmentDate")
+    .min = today;
+}
+
+
+initialize();
+
+</script>
+
+</body>
+</html>
