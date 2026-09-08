@@ -5,31 +5,47 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>A2 Outdoor Services</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f5f7f3;color:#142015}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7f3;color:#142015}
 header{background:#102714;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
-.logo{font-size:24px;font-weight:900}nav a{color:white;text-decoration:none;margin-left:18px;font-weight:700}
+.logo{font-size:24px;font-weight:900}
+nav a{color:white;text-decoration:none;margin-left:18px;font-weight:700}
 .hero{padding:70px 7%;background:linear-gradient(135deg,#153b1b,#2f7438);color:white}
-.hero h1{font-size:48px;margin:0 0 12px}.hero p{font-size:19px;max-width:650px}
+.hero h1{font-size:48px;margin:0 0 12px}
+.hero p{font-size:19px;max-width:650px}
 .btn{display:inline-block;padding:13px 18px;border-radius:10px;border:0;background:#e8f5e8;color:#143116;font-weight:800;text-decoration:none;cursor:pointer;margin:5px}
-.btn.dark{background:#102714;color:white}.btn.gold{background:#f2c94c;color:#18140a}
-section{padding:45px 7%;max-width:1200px;margin:auto}.title{text-align:center;margin-bottom:25px}
+.btn.dark{background:#102714;color:white}
+.btn.gold{background:#f2c94c;color:#18140a}
+section{padding:45px 7%;max-width:1200px;margin:auto}
+.title{text-align:center;margin-bottom:25px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:white;border-radius:16px;padding:22px;box-shadow:0 5px 18px #00000012}.price{font-size:28px;font-weight:900}
+.card{background:white;border-radius:16px;padding:22px;box-shadow:0 5px 18px #00000012}
+.price{font-size:28px;font-weight:900}
 input,select,textarea{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #ccd4ca;border-radius:9px}
-label{font-weight:700;font-size:14px}.notice{padding:14px;border-radius:10px;background:#eef6ee;margin:10px 0}
+label{font-weight:700;font-size:14px}
+.notice{padding:14px;border-radius:10px;background:#eef6ee;margin:10px 0}
 .small{font-size:13px;color:#5b665b}
 footer{background:#102714;color:white;text-align:center;padding:30px}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:20px;overflow:auto}.modalbox{background:white;max-width:600px;margin:5% auto;padding:25px;border-radius:16px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:20px;overflow:auto}
+.modalbox{background:white;max-width:600px;margin:5% auto;padding:25px;border-radius:16px}
 #dashboard{display:none}
-@media(max-width:650px){.hero h1{font-size:36px}nav{display:none}}
+@media(max-width:650px){
+.hero h1{font-size:36px}
+nav{display:none}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-<header><div class="logo">A2 Outdoor Services</div><nav>
-<a href="#services">Services</a><a href="#book">Book</a><a href="#reviews">Reviews</a><a href="#account">Account</a>
-</nav></header>
-
+<header>
+<div class="logo">A2 Outdoor Services</div>
+<nav>
+<a href="#services">Services</a>
+<a href="#book">Book</a>
+<a href="#reviews">Reviews</a>
+<a href="#account">Account</a>
+</nav>
+</header>
 <div class="hero">
 <h1>Clean yards. Clean rides.</h1>
 <p>Lawn mowing, edging and car washing from A2 Outdoor Services. Simple booking, clear prices and easy contact.</p>
@@ -37,157 +53,684 @@ footer{background:#102714;color:white;text-align:center;padding:30px}
 <a class="btn" href="tel:+13252062463">Call / Text</a>
 <a class="btn" href="https://instagram.com/a2outdoorservices" target="_blank">Instagram</a>
 </div>
-
-<section id="services"><div class="title"><h2>Services & Pricing</h2><p>Affordable local service</p></div>
+<section id="services">
+<div class="title">
+<h2>Services & Pricing</h2>
+<p>Affordable local service</p>
+</div>
 <div class="grid">
-<div class="card"><h3>🌱 Lawn Mowing</h3><div class="price">$20</div></div>
-<div class="card"><h3>✂️ Edging</h3><div class="price">$15</div></div>
-<div class="card"><h3>🌱 Lawn + Edging</h3><div class="price">$35</div></div>
-<div class="card"><h3>🚗 Car Wash</h3><div class="price">$25</div></div>
-<div class="card"><h3>🔥 Complete Package</h3><div class="price">$60</div><p>Lawn mowing + edging + car wash</p></div>
-</div></section>
-
-<section id="book"><div class="title"><h2>Book Your Service</h2><p>Pick a service and an available time</p></div>
+<div class="card">
+<h3>🌱 Lawn Mowing</h3>
+<div class="price">$20</div>
+</div>
+<div class="card">
+<h3>✂️ Edging</h3>
+<div class="price">$15</div>
+</div>
+<div class="card">
+<h3>🌱 Lawn + Edging</h3>
+<div class="price">$35</div>
+</div>
+<div class="card">
+<h3>🚗 Car Wash</h3>
+<div class="price">$25</div>
+</div>
+<div class="card">
+<h3>🔥 Complete Package</h3>
+<div class="price">$60</div>
+<p>Lawn mowing + edging + car wash</p>
+</div>
+</div>
+</section>
+<section id="book">
+<div class="title">
+<h2>Book Your Service</h2>
+<p>Pick a service and an available time</p>
+</div>
 <div class="card">
 <form id="bookingForm">
-<label>Service</label><select id="service">
+<label>Service</label>
+<select id="service">
 <option value="Lawn Mowing|20">Lawn Mowing — $20</option>
 <option value="Edging|15">Edging — $15</option>
 <option value="Lawn + Edging|35">Lawn + Edging — $35</option>
 <option value="Car Wash|25">Car Wash — $25</option>
 <option value="Complete Package|60">Complete Package — $60</option>
 </select>
-<label>Date</label><input id="date" type="date" required>
-<label>Time</label><select id="time" required></select>
-<label>Name</label><input id="name" required>
-<label>Phone</label><input id="phone" type="tel" required>
-<label>Address / Service Location</label><textarea id="address" required></textarea>
+<label>Date</label>
+<input id="date" type="date" required>
+<label>Time</label>
+<select id="time" required>
+<option value="">Select a time</option>
+<option>9:00 AM</option>
+<option>10:00 AM</option>
+<option>11:00 AM</option>
+<option>12:00 PM</option>
+<option>1:00 PM</option>
+<option>2:00 PM</option>
+<option>3:00 PM</option>
+<option>4:00 PM</option>
+<option>5:00 PM</option>
+</select>
+<label>Name</label>
+<input id="name" required>
+<label>Phone</label>
+<input id="phone" type="tel" required>
+<label>Address / Service Location</label>
+<textarea id="address" required></textarea>
 <button class="btn dark" type="submit">Request Booking</button>
 </form>
 <div id="bookMsg"></div>
-<p class="small">Online payment and automated SMS notifications need a payment/SMS provider connection before they can process real transactions or texts.</p>
-</div></section>
-
-<section id="account"><div class="title"><h2>Customer Account</h2><p>Keep track of bookings and payments</p></div>
-<div class="grid">
-<div class="card"><h3>Create / Sign In</h3><input id="email" type="email" placeholder="Email"><input id="pw" type="password" placeholder="Password"><button class="btn dark" onclick="login()">Sign In / Create</button><div id="loginMsg"></div></div>
-<div class="card"><h3>My Bookings</h3><div id="myBookings">Sign in to see your bookings.</div></div>
-</div></section>
-
-<section id="reviews"><div class="title"><h2>Customer Reviews</h2><p>Real reviews can be added here after jobs are completed</p></div>
-<div id="reviewsBox" class="grid"></div>
-<div class="card"><h3>Leave a Review</h3><input id="reviewName" placeholder="Your name"><select id="stars"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select><textarea id="reviewText" placeholder="How did we do?"></textarea><button class="btn dark" onclick="addReview()">Post Review</button></div>
+<p class="small">
+Online payment and automated SMS notifications need a payment/SMS provider connection before they can process real transactions or texts.
+</p>
+</div>
 </section>
-
-<section><div class="title"><h2>FAQ</h2></div>
-<div class="grid"><div class="card"><b>What if it rains?</b><p>Outdoor jobs can be rescheduled for safer weather.</p></div>
-<div class="card"><b>How do I reschedule?</b><p>Use your account or contact A2 directly.</p></div>
-<div class="card"><b>Where do you service?</b><p>Set your service area in the admin settings.</p></div>
-<div class="card"><b>Need a custom quote?</b><p>Call or text (325) 206-2463.</p></div></div></section>
-
-<section id="ownerLogin" style="display:none"><div class="title"><h2>Owner Login</h2><p>Private business controls</p></div>
+<section id="account">
+<div class="title">
+<h2>Customer Account</h2>
+<p>Keep track of bookings and payments</p>
+</div>
+<div class="grid">
+<div class="card">
+<h3>Create / Sign In</h3>
+<input id="email" type="email" placeholder="Email">
+<input id="pw" type="password" placeholder="Password">
+<button class="btn dark" onclick="login()">Sign In / Create</button>
+<div id="loginMsg"></div>
+</div>
+<div class="card">
+<h3>My Bookings</h3>
+<div id="myBookings">
+Sign in to see your bookings.
+</div>
+</div>
+</div>
+</section>
+<section id="reviews">
+<div class="title">
+<h2>Customer Reviews</h2>
+<p>Real reviews can be added here after jobs are completed</p>
+</div>
+<div id="reviewsBox" class="grid"></div>
+<div class="card">
+<h3>Leave a Review</h3>
+<input id="reviewName" placeholder="Your name">
+<select id="stars">
+<option>5</option>
+<option>4</option>
+<option>3</option>
+<option>2</option>
+<option>1</option>
+</select>
+<textarea id="reviewText" placeholder="How did we do?"></textarea>
+<button class="btn dark" onclick="addReview()">Post Review</button>
+</div>
+</section>
+<section>
+<div class="title">
+<h2>FAQ</h2>
+</div>
+<div class="grid">
+<div class="card">
+<b>What if it rains?</b>
+<p>Outdoor jobs can be rescheduled for safer weather.</p>
+</div>
+<div class="card">
+<b>How do I reschedule?</b>
+<p>Use your account or contact A2 directly.</p>
+</div>
+<div class="card">
+<b>Where do you service?</b>
+<p>Set your service area in the admin settings.</p>
+</div>
+<div class="card">
+<b>Need a custom quote?</b>
+<p>Call or text (325) 206-2463.</p>
+</div>
+</div>
+</section>
+<section id="ownerLogin" style="display:none">
+<div class="title">
+<h2>Owner Login</h2>
+<p>Private business controls</p>
+</div>
 <div class="card" style="max-width:520px;margin:auto">
-<p class="small">Secure owner sign-in. Your password is handled by the authentication service and is never stored in this website.</p>
-<label>Email</label><input id="ownerEmail" type="email" autocomplete="username" placeholder="Owner email">
-<label>Password</label><input id="ownerPassword" type="password" autocomplete="current-password" placeholder="Password">
-<button class="btn dark" onclick="ownerSignIn()">Sign In</button>
-<button class="btn" onclick="ownerSignOut()" id="signOutBtn" style="display:none">Sign Out</button>
+<p class="small">
+Secure owner sign-in. Your password is handled by the authentication service and is never stored in this website.
+</p>
+<label>Email</label>
+<input
+id="ownerEmail"
+type="email"
+autocomplete="username"
+placeholder="Owner email"
+>
+<label>Password</label>
+<input
+id="ownerPassword"
+type="password"
+autocomplete="current-password"
+placeholder="Password"
+>
+<button class="btn dark" onclick="ownerSignIn()">
+Sign In
+</button>
+<button class="btn" onclick="showResetPassword()">
+Forgot Password
+</button>
+<button
+class="btn"
+onclick="ownerSignOut()"
+id="signOutBtn"
+style="display:none"
+>
+Sign Out
+</button>
 <div id="ownerMsg"></div>
 </div>
-<div id="dashboard" class="card" style="display:none;max-width:900px;margin:25px auto 0">
+<div
+id="dashboard"
+class="card"
+style="display:none;max-width:900px;margin:25px auto 0"
+>
 <h2>Owner Dashboard</h2>
-<p>You're signed in as <b id="signedInEmail"></b>.</p>
+<p>
+You're signed in as
+<b id="signedInEmail"></b>.
+</p>
 <div class="grid">
-<div><h3>Bookings</h3><p>Manage upcoming customer bookings from your connected database.</p></div>
-<div><h3>Availability</h3><p>Update the times customers can book.</p></div>
-<div><h3>Promotions</h3><p>Create or disable promo codes.</p></div>
-<div><h3>Customer accounts</h3><p>View customer data only through protected database policies.</p></div>
+<div>
+<h3>Bookings</h3>
+<p>
+Manage upcoming customer bookings from your connected database.
+</p>
 </div>
-<div class="notice">Production security is enabled through Supabase Authentication + Row Level Security. Do not put passwords or secret service keys in this HTML.</div>
-</div></section>
-<footer><b id="ownerTrigger" style="cursor:default">A2 Outdoor Services</b><p>Lawn mowing • Edging • Car washing</p><p>📞 (325) 206-2463 &nbsp; | &nbsp; 📸 @a2outdoorservices</p></footer>
-
-<div class="modal" id="payModal"><div class="modalbox"><h2>Payment</h2><p>Payment is ready to connect to a real payment provider.</p><p class="notice">No card information is collected by this demo.</p><button class="btn dark" onclick="closePay()">Close</button></div></div>
-
+<div>
+<h3>Availability</h3>
+<p>
+Update the times customers can book.
+</p>
+</div>
+<div>
+<h3>Promotions</h3>
+<p>
+Create or disable promo codes.
+</p>
+</div>
+<div>
+<h3>Customer accounts</h3>
+<p>
+View customer data only through protected database policies.
+</p>
+</div>
+</div>
+<div class="notice">
+Production security is enabled through Supabase Authentication + Row Level Security.
+Do not put passwords or secret service keys in this HTML.
+</div>
+</div>
+</section>
+<footer>
+<b id="ownerTrigger" style="cursor:default">
+A2 Outdoor Services
+</b>
+<p>
+Lawn mowing • Edging • Car washing
+</p>
+<p>
+📞 (325) 206-2463 &nbsp; | &nbsp; 📸 @a2outdoorservices
+</p>
+</footer>
+<div class="modal" id="resetModal">
+<div class="modalbox">
+<h2>Reset Owner Password</h2>
+<p>
+Enter your owner email and we'll send you a password reset link.
+</p>
+<input
+id="resetEmail"
+type="email"
+placeholder="Owner email"
+>
+<button
+class="btn dark"
+onclick="sendResetEmail()"
+>
+Send Reset Link
+</button>
+<button
+class="btn"
+onclick="closeReset()"
+>
+Cancel
+</button>
+<div id="resetMsg"></div>
+</div>
+</div>
+<div class="modal" id="newPasswordModal">
+<div class="modalbox">
+<h2>Choose New Password</h2>
+<p>
+Enter your new owner password below.
+</p>
+<input
+id="newPassword"
+type="password"
+placeholder="New password"
+>
+<input
+id="confirmPassword"
+type="password"
+placeholder="Confirm new password"
+>
+<button
+class="btn dark"
+onclick="updateOwnerPassword()"
+>
+Update Password
+</button>
+<div id="newPasswordMsg"></div>
+</div>
+</div>
+<div class="modal" id="payModal">
+<div class="modalbox">
+<h2>Payment</h2>
+<p>
+Payment is ready to connect to a real payment provider.
+</p>
+<p class="notice">
+No card information is collected by this demo.
+</p>
+<button
+class="btn dark"
+onclick="closePay()"
+>
+Close
+</button>
+</div>
+</div>
 <script>
-// Supabase configuration: replace these two public values with your project's URL and anon/publishable key.
-// Never place a Supabase service_role/secret key in this file.
-const SUPABASE_URL = 'https://nzqywkzkzrlmxebcvgyt.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_AZytif7CNFPBPZ2UGVHi4Q_zyIqDYXj';
-const supabaseConfigured = !SUPABASE_URL.includes('YOUR_') && !SUPABASE_ANON_KEY.includes('YOUR_');
-const sb = supabaseConfigured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
+const SUPABASE_URL =
+'https://nzqywkzkzrlmxebcvgyt.supabase.co';
+const SUPABASE_ANON_KEY =
+'sb_publishable_AZytif7CNFPBPZ2UGVHi4Q_zyIqDYXj';
+const supabaseConfigured =
+!SUPABASE_URL.includes('YOUR_') &&
+!SUPABASE_ANON_KEY.includes('YOUR_');
+const sb =
+supabaseConfigured
+? window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+)
+: null;
+// OWNER LOGIN
 let ownerTaps = 0;
 let ownerTimer;
-const trigger = document.getElementById('ownerTrigger');
-trigger.addEventListener('click', () => {
-  ownerTaps++;
-  clearTimeout(ownerTimer);
-  ownerTimer = setTimeout(() => ownerTaps = 0, 1800);
-  if (ownerTaps >= 5) {
-    document.getElementById('ownerLogin').style.display = 'block';
-    document.getElementById('ownerLogin').scrollIntoView({behavior:'smooth'});
-    ownerTaps = 0;
-    refreshOwnerUI();
-  }
+const trigger =
+document.getElementById('ownerTrigger');
+trigger.addEventListener('click',() => {
+ownerTaps++;
+clearTimeout(ownerTimer);
+ownerTimer =
+setTimeout(
+() => ownerTaps = 0,
+1800
+);
+if(ownerTaps >= 5){
+document.getElementById(
+'ownerLogin'
+).style.display = 'block';
+document.getElementById(
+'ownerLogin'
+).scrollIntoView({
+behavior:'smooth'
 });
-
-function msg(text, ok=false){
-  document.getElementById('ownerMsg').innerHTML = '<div class="notice">'+text+'</div>';
+ownerTaps = 0;
+refreshOwnerUI();
 }
-
+});
+// OWNER MESSAGE
+function msg(text){
+document.getElementById(
+'ownerMsg'
+).innerHTML =
+'<div class="notice">'+text+'</div>';
+}
+// OWNER SIGN IN
 async function ownerSignIn(){
-  if(!sb){ msg('Owner login is not configured yet. Add your Supabase project URL and anon key first.'); return; }
-  const email=document.getElementById('ownerEmail').value.trim();
-  const password=document.getElementById('ownerPassword').value;
-  if(!email || !password){ msg('Enter your owner email and password.'); return; }
-  const {data,error}=await sb.auth.signInWithPassword({email,password});
-  if(error){ msg('Sign in failed. Check your email and password.'); return; }
-  await refreshOwnerUI(data.user);
+if(!sb){
+msg('Owner login is not configured yet.');
+return;
 }
-
+const email =
+document.getElementById(
+'ownerEmail'
+).value.trim();
+const password =
+document.getElementById(
+'ownerPassword'
+).value;
+if(!email || !password){
+msg(
+'Enter your owner email and password.'
+);
+return;
+}
+const {data,error} =
+await sb.auth.signInWithPassword({
+email,
+password
+});
+if(error){
+msg(
+'Sign in failed. Check your email and password.'
+);
+return;
+}
+await refreshOwnerUI(data.user);
+}
+// OWNER SIGN OUT
 async function ownerSignOut(){
-  if(sb) await sb.auth.signOut();
-  refreshOwnerUI(null);
+if(sb){
+await sb.auth.signOut();
 }
-
+refreshOwnerUI(null);
+}
+// OWNER UI
 async function refreshOwnerUI(userArg){
-  if(!sb){
-    document.getElementById('dashboard').style.display='none';
-    document.getElementById('signOutBtn').style.display='none';
-    return;
-  }
-  const {data:{user}} = userArg ? {data:{user:userArg}} : await sb.auth.getUser();
-  const dashboard=document.getElementById('dashboard');
-  const signOut=document.getElementById('signOutBtn');
-  if(user){
-    const {data:owner,error:ownerError}=await sb.from('owner_access').select('user_id').eq('user_id',user.id).maybeSingle();
-    if(owner && !ownerError){
-      dashboard.style.display='block';
-      signOut.style.display='inline-block';
-      document.getElementById('signedInEmail').textContent=user.email || '';
-      msg('Owner dashboard unlocked.');
-    }else{
-      await sb.auth.signOut();
-      dashboard.style.display='none';
-      signOut.style.display='none';
-      document.getElementById('signedInEmail').textContent='';
-      msg('This account is not authorized as the owner.');
-    }
-  }else{
-    dashboard.style.display='none';
-    signOut.style.display='none';
-    document.getElementById('signedInEmail').textContent='';
-  }
+if(!sb){
+document.getElementById(
+'dashboard'
+).style.display='none';
+document.getElementById(
+'signOutBtn'
+).style.display='none';
+return;
 }
-
-if(sb){ sb.auth.onAuthStateChange((_event, session)=>refreshOwnerUI(session?.user || null)); }
-
-// Existing customer/booking demo logic
-function showModal(id){document.getElementById(id).style.display='block'}
-function closeModal(id){document.getElementById(id).style.display='none'}
-const bookingForm=document.getElementById('bookingForm');
-if(bookingForm) bookingForm.addEventListener('submit',e=>{e.preventDefault();document.getElementById('bookingMsg').innerHTML='<div class="notice">Booking request received. We will contact you to confirm.</div>';bookingForm.reset()});
+const {data:{user}} =
+userArg
+? {data:{user:userArg}}
+: await sb.auth.getUser();
+const dashboard =
+document.getElementById('dashboard');
+const signOut =
+document.getElementById('signOutBtn');
+if(user){
+const {data:owner,error:ownerError} =
+await sb
+.from('owner_access')
+.select('user_id')
+.eq('user_id',user.id)
+.maybeSingle();
+if(owner && !ownerError){
+dashboard.style.display='block';
+signOut.style.display='inline-block';
+document.getElementById(
+'signedInEmail'
+).textContent =
+user.email || '';
+msg(
+'Owner dashboard unlocked.'
+);
+}else{
+await sb.auth.signOut();
+dashboard.style.display='none';
+signOut.style.display='none';
+document.getElementById(
+'signedInEmail'
+).textContent='';
+msg(
+'This account is not authorized as the owner.'
+);
+}
+}else{
+dashboard.style.display='none';
+signOut.style.display='none';
+document.getElementById(
+'signedInEmail'
+).textContent='';
+}
+}
+// PASSWORD RESET
+function showResetPassword(){
+const email =
+document.getElementById(
+'ownerEmail'
+).value.trim();
+document.getElementById(
+'resetEmail'
+).value =
+email;
+document.getElementById(
+'resetMsg'
+).innerHTML='';
+document.getElementById(
+'resetModal'
+).style.display='block';
+}
+function closeReset(){
+document.getElementById(
+'resetModal'
+).style.display='none';
+}
+// SEND RESET EMAIL
+async function sendResetEmail(){
+if(!sb){
+document.getElementById(
+'resetMsg'
+).innerHTML =
+'<div class="notice">Supabase is not configured.</div>';
+return;
+}
+const email =
+document.getElementById(
+'resetEmail'
+).value.trim();
+if(!email){
+document.getElementById(
+'resetMsg'
+).innerHTML =
+'<div class="notice">Enter your owner email.</div>';
+return;
+}
+const redirectUrl =
+'https://84p86m5r96-blip.github.io/-a2-outdoor-services/';
+const {error} =
+await sb.auth.resetPasswordForEmail(
+email,
+{
+redirectTo:redirectUrl
+}
+);
+if(error){
+document.getElementById(
+'resetMsg'
+).innerHTML =
+'<div class="notice">Could not send the reset email. Check your Supabase settings.</div>';
+return;
+}
+document.getElementById(
+'resetMsg'
+).innerHTML =
+'<div class="notice">Reset link sent. Check your email.</div>';
+}
+// UPDATE PASSWORD
+async function updateOwnerPassword(){
+if(!sb) return;
+const password =
+document.getElementById(
+'newPassword'
+).value;
+const confirm =
+document.getElementById(
+'confirmPassword'
+).value;
+if(!password || password.length < 6){
+document.getElementById(
+'newPasswordMsg'
+).innerHTML =
+'<div class="notice">Password must be at least 6 characters.</div>';
+return;
+}
+if(password !== confirm){
+document.getElementById(
+'newPasswordMsg'
+).innerHTML =
+'<div class="notice">The passwords do not match.</div>';
+return;
+}
+const {error} =
+await sb.auth.updateUser({
+password:password
+});
+if(error){
+document.getElementById(
+'newPasswordMsg'
+).innerHTML =
+'<div class="notice">Password update failed. Try the reset link again.</div>';
+return;
+}
+document.getElementById(
+'newPasswordMsg'
+).innerHTML =
+'<div class="notice">Password updated successfully. You can now sign in.</div>';
+setTimeout(() => {
+document.getElementById(
+'newPasswordModal'
+).style.display='none';
+},1500);
+}
+// PASSWORD RECOVERY
+if(sb){
+sb.auth.onAuthStateChange(
+async(event,session) => {
+if(event === 'PASSWORD_RECOVERY'){
+document.getElementById(
+'newPasswordModal'
+).style.display='block';
+}
+refreshOwnerUI(
+session?.user || null
+);
+});
+}
+// CUSTOMER LOGIN
+async function login(){
+if(!sb){
+document.getElementById(
+'loginMsg'
+).innerHTML =
+'<div class="notice">Login is not configured.</div>';
+return;
+}
+const email =
+document.getElementById(
+'email'
+).value.trim();
+const password =
+document.getElementById(
+'pw'
+).value;
+if(!email || !password){
+document.getElementById(
+'loginMsg'
+).innerHTML =
+'<div class="notice">Enter an email and password.</div>';
+return;
+}
+let result =
+await sb.auth.signInWithPassword({
+email,
+password
+});
+if(result.error){
+result =
+await sb.auth.signUp({
+email,
+password
+});
+}
+if(result.error){
+document.getElementById(
+'loginMsg'
+).innerHTML =
+'<div class="notice">'+
+result.error.message+
+'</div>';
+return;
+}
+document.getElementById(
+'loginMsg'
+).innerHTML =
+'<div class="notice">You are signed in.</div>';
+}
+// REVIEWS
+function addReview(){
+const name =
+document.getElementById(
+'reviewName'
+).value.trim();
+const text =
+document.getElementById(
+'reviewText'
+).value.trim();
+const stars =
+document.getElementById(
+'stars'
+).value;
+if(!name || !text) return;
+const box =
+document.getElementById(
+'reviewsBox'
+);
+const card =
+document.createElement('div');
+card.className='card';
+card.innerHTML =
+'<h3>'+name+'</h3>'+
+'<p>'+stars+' stars</p>'+
+'<p>'+text+'</p>';
+box.appendChild(card);
+document.getElementById(
+'reviewName'
+).value='';
+document.getElementById(
+'reviewText'
+).value='';
+}
+// BOOKING
+const bookingForm =
+document.getElementById(
+'bookingForm'
+);
+if(bookingForm){
+bookingForm.addEventListener(
+'submit',
+e => {
+e.preventDefault();
+document.getElementById(
+'bookMsg'
+).innerHTML =
+'<div class="notice">Booking request received. We will contact you to confirm.</div>';
+bookingForm.reset();
+});
+}
+// MODALS
+function showModal(id){
+document.getElementById(
+id
+).style.display='block';
+}
+function closeModal(id){
+document.getElementById(
+id
+).style.display='none';
+}
+function closePay(){
+closeModal('payModal');
+}
 </script>
 </body>
 </html>
