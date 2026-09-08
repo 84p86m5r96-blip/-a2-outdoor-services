@@ -828,6 +828,11 @@ async function signOut(){
 
   document.getElementById("customerBookings").innerHTML =
     '<div class="notice">Sign in to view your appointments.</div>';
+
+  document
+    .getElementById("ownerPanel")
+    .classList.add("hidden");
+
 }
 
 
@@ -1150,7 +1155,7 @@ async function loadCustomerBookings(){
   if(!data || data.length === 0){
 
     box.innerHTML =
-      '<div class="notice">You don\'t have any appointments yet.</div>';
+      "<div class=\"notice\">You don't have any appointments yet.</div>";
 
     return;
   }
@@ -1508,6 +1513,29 @@ async function submitReview(event){
 
 
 /* =========================================
+   OWNER SECURITY CHECK
+========================================= */
+
+async function isCurrentUserOwner(){
+
+  const {data,error} =
+    await supabaseClient.rpc("is_owner");
+
+  if(error){
+
+    console.error(
+      "Owner check failed:",
+      error
+    );
+
+    return false;
+  }
+
+  return data === true;
+}
+
+
+/* =========================================
    OWNER DASHBOARD
 ========================================= */
 
@@ -1516,6 +1544,10 @@ function openOwnerDashboard(){
   document
     .getElementById("ownerDashboard")
     .classList.remove("hidden");
+
+  document
+    .getElementById("ownerPanel")
+    .classList.add("hidden");
 
   document
     .getElementById("ownerDashboard")
@@ -1534,6 +1566,8 @@ function closeOwnerDashboard(){
   document
     .getElementById("ownerPanel")
     .classList.add("hidden");
+
+  document.getElementById("ownerMessage").innerHTML = "";
 }
 
 
@@ -1559,41 +1593,72 @@ async function ownerLogin(){
   }
 
   message.innerHTML =
-    '<div class="notice">Signing in...</div>';
+    '<div class="notice">Checking owner account...</div>';
 
-  const {data,error} =
-    await supabaseClient.auth.signInWithPassword({
-      email:email,
-      password:password
-    });
+  try{
 
-  if(error){
+    const {data,error} =
+      await supabaseClient.auth.signInWithPassword({
+        email:email,
+        password:password
+      });
+
+    if(error){
+
+      showMessage(
+        message,
+        error.message
+      );
+
+      return;
+    }
+
+    /*
+      Password authentication alone does NOT
+      give owner access.
+
+      Supabase checks the account's user ID
+      against public.owner_users.
+    */
+
+    const owner =
+      await isCurrentUserOwner();
+
+    if(!owner){
+
+      await supabaseClient.auth.signOut();
+
+      showMessage(
+        message,
+        "This account is not authorized for owner access."
+      );
+
+      document
+        .getElementById("ownerPanel")
+        .classList.add("hidden");
+
+      return;
+    }
 
     showMessage(
       message,
-      error.message
+      "Owner signed in successfully.",
+      "success"
     );
 
-    return;
+    document
+      .getElementById("ownerPanel")
+      .classList.remove("hidden");
+
+    loadOwnerBookings();
+
+  }catch(error){
+
+    showMessage(
+      message,
+      error.message || "Something went wrong."
+    );
   }
-
-  /*
-    IMPORTANT
-
-    The Supabase database RLS policies should control
-    which authenticated user can read or modify all bookings.
-
-    Do not put a Supabase service role key in this website.
-  */
-
-  message.innerHTML =
-    '<div class="notice success">Owner signed in.</div>';
-
-  document
-    .getElementById("ownerPanel")
-    .classList.remove("hidden");
-
-  loadOwnerBookings();
 }
 
 
@@ -1620,22 +1685,25 @@ async function loadOwnerBookings(){
     document.getElementById("ownerBookings");
 
   box.innerHTML =
-    '<div class="notice">Loading appointments...</div>';
+    '<div class="notice">Checking owner access...</div>';
 
-  const {
-    data:{user}
-  } =
-    await supabaseClient.auth.getUser();
+  const owner =
+    await isCurrentUserOwner();
 
-  if(!user){
+  if(!owner){
 
-    showMessage(
-      box,
-      "Owner must be signed in."
-    );
+    box.innerHTML =
+      '<div class="notice warning">Owner access denied.</div>';
+
+    document
+      .getElementById("ownerPanel")
+      .classList.add("hidden");
 
     return;
   }
+
+  box.innerHTML =
+    '<div class="notice">Loading appointments...</div>';
 
   const {data,error} =
     await supabaseClient
@@ -1761,6 +1829,15 @@ async function loadOwnerBookings(){
 ========================================= */
 
 async function updateBookingStatus(id,status){
+
+  const owner =
+    await isCurrentUserOwner();
+
+  if(!owner){
+
+    alert("Owner access denied.");
+    return;
+  }
 
   const {error} =
     await supabaseClient
@@ -1896,6 +1973,7 @@ document
 
 /* =========================================
    OWNER DASHBOARD ACCESS
+   10 CLICKS
 ========================================= */
 
 let logoClicks = 0;
@@ -1914,7 +1992,7 @@ document
         logoClicks = 0;
       },1000);
 
-    if(logoClicks >= 5){
+    if(logoClicks >= 10){
 
       logoClicks = 0;
 
