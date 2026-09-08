@@ -4,125 +4,289 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>A2 Outdoor Services</title>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7f3;color:#142015}
-header{background:#102714;color:white;padding:22px 7%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
-.logo{font-size:24px;font-weight:900}
-nav a{color:white;text-decoration:none;margin-left:18px;font-weight:700}
-.hero{padding:70px 7%;background:linear-gradient(135deg,#153b1b,#2f7438);color:white}
-.hero h1{font-size:48px;margin:0 0 12px}
-.hero p{font-size:19px;max-width:650px}
-.btn{display:inline-block;padding:13px 18px;border-radius:10px;border:0;background:#e8f5e8;color:#143116;font-weight:800;text-decoration:none;cursor:pointer;margin:5px}
-.btn.dark{background:#102714;color:white}
-.btn.gold{background:#f2c94c;color:#18140a}
-section{padding:45px 7%;max-width:1200px;margin:auto}
-.title{text-align:center;margin-bottom:25px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
-.card{background:white;border-radius:16px;padding:22px;box-shadow:0 5px 18px #00000012}
-.price{font-size:28px;font-weight:900}
-input,select,textarea{width:100%;padding:12px;margin:7px 0 13px;border:1px solid #ccd4ca;border-radius:9px}
-label{font-weight:700;font-size:14px}
-.notice{padding:14px;border-radius:10px;background:#eef6ee;margin:10px 0}
-.small{font-size:13px;color:#5b665b}
-footer{background:#102714;color:white;text-align:center;padding:30px}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;padding:20px;overflow:auto}
-.modalbox{background:white;max-width:600px;margin:5% auto;padding:25px;border-radius:16px}
-#dashboard{display:none}
-
+html{scroll-behavior:smooth}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#f3f7f2;
+color:#142015
+}
+header{
+background:#0c2111;
+color:white;
+padding:17px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:10;
+box-shadow:0 4px 20px #0003
+}
+.logo{
+font-size:21px;
+font-weight:900
+}
+nav a{
+color:white;
+text-decoration:none;
+margin-left:16px;
+font-weight:700
+}
+.hero{
+padding:80px 7%;
+background:linear-gradient(135deg,#0c2812,#347c3c);
+color:white
+}
+.hero h1{
+font-size:clamp(38px,7vw,64px);
+margin:0 0 15px;
+line-height:1
+}
+.hero p{
+font-size:18px;
+max-width:650px;
+line-height:1.6
+}
+.btn{
+display:inline-block;
+padding:13px 18px;
+border:0;
+border-radius:10px;
+font-weight:800;
+cursor:pointer;
+text-decoration:none;
+margin:5px
+}
+.btn.dark{
+background:#0c2111;
+color:white
+}
+.btn.light{
+background:white;
+color:#0c2111
+}
+.btn.gold{
+background:#f2c94c;
+color:#171307
+}
+.btn.danger{
+background:#a52c2c;
+color:white
+}
+section{
+padding:55px 7%;
+max-width:1200px;
+margin:auto
+}
+.title{
+text-align:center;
+margin-bottom:28px
+}
+.title h2{
+font-size:32px;
+margin-bottom:7px
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px
+}
+.card{
+background:white;
+border-radius:18px;
+padding:23px;
+box-shadow:0 8px 25px #0000000d
+}
+.card h3{
+margin-top:0
+}
+.price{
+font-size:30px;
+font-weight:900
+}
+input,select,textarea{
+width:100%;
+padding:13px;
+margin:7px 0 14px;
+border:1px solid #ccd6cc;
+border-radius:10px;
+font:inherit
+}
+textarea{
+min-height:100px;
+resize:vertical
+}
+label{
+font-weight:700;
+font-size:14px
+}
+.notice{
+padding:14px;
+border-radius:10px;
+background:#edf6ed;
+margin:12px 0;
+line-height:1.5
+}
+.error{
+background:#ffecec;
+color:#8b1d1d
+}
+.small{
+font-size:13px;
+color:#657065
+}
+.status{
+display:inline-block;
+padding:6px 10px;
+border-radius:20px;
+background:#edf6ed;
+font-size:12px;
+font-weight:800
+}
+.hidden{
+display:none!important
+}
+footer{
+background:#0c2111;
+color:white;
+text-align:center;
+padding:35px
+}
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#0008;
+z-index:50;
+padding:20px;
+overflow:auto
+}
+.modalbox{
+background:white;
+max-width:550px;
+margin:6% auto;
+padding:25px;
+border-radius:18px
+}
+.booking{
+border:1px solid #dce5dc;
+border-radius:14px;
+padding:16px;
+margin:12px 0
+}
+#ownerLogin{
+display:none
+}
 @media(max-width:650px){
-.hero h1{font-size:36px}
-nav{display:none}
+header{
+padding:15px 5%
+}
+nav{
+display:none
+}
+.hero{
+padding:65px 6%
+}
+section{
+padding:45px 6%
+}
 }
 </style>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-
 <body>
-
 <header>
-<div class="logo">A2 Outdoor Services</div>
+<div class="logo">
+A2 Outdoor Services
+</div>
 <nav>
 <a href="#services">Services</a>
 <a href="#book">Book</a>
-<a href="#reviews">Reviews</a>
 <a href="#account">Account</a>
+<a href="#reviews">Reviews</a>
 </nav>
 </header>
-
-<div class="hero">
+<section class="hero">
 <h1>Clean yards. Clean rides.</h1>
-<p>Lawn mowing, edging and car washing from A2 Outdoor Services. Simple booking, clear prices and easy contact.</p>
-
-<a class="btn gold" href="#book">Book a Service</a>
-<a class="btn" href="tel:+13252062463">Call / Text</a>
-<a class="btn" href="https://instagram.com/a2outdoorservices" target="_blank">Instagram</a>
-</div>
-
+<p>
+Professional lawn care and car washing from A2 Outdoor Services.
+Simple booking. Clear pricing. Reliable service.
+</p>
+<a class="btn gold" href="#book">
+Book a Service
+</a>
+<a class="btn light" href="tel:+13252062463">
+Call / Text
+</a>
+<a class="btn light"
+href="https://instagram.com/a2outdoorservices"
+target="_blank">
+Instagram
+</a>
+</section>
 <section id="services">
 <div class="title">
 <h2>Services & Pricing</h2>
-<p>Affordable local service</p>
+<p>Simple pricing with no confusing packages</p>
 </div>
-
 <div class="grid">
-
 <div class="card">
-<h3>🌱 Lawn Mowing</h3>
+<h3>Lawn Mowing</h3>
 <div class="price">$20</div>
+<p>Basic lawn mowing service.</p>
 </div>
-
 <div class="card">
-<h3>✂️ Edging</h3>
+<h3>Edging</h3>
 <div class="price">$15</div>
+<p>Clean edges around your lawn.</p>
 </div>
-
 <div class="card">
-<h3>🌱 Lawn + Edging</h3>
+<h3>Lawn + Edging</h3>
 <div class="price">$35</div>
+<p>Mowing plus clean edging.</p>
 </div>
-
 <div class="card">
-<h3>🚗 Car Wash</h3>
+<h3>Car Wash</h3>
 <div class="price">$25</div>
+<p>Basic exterior car wash.</p>
 </div>
-
 <div class="card">
-<h3>🔥 Complete Package</h3>
+<h3>Complete Package</h3>
 <div class="price">$60</div>
-<p>Lawn mowing + edging + car wash</p>
+<p>Lawn mowing + edging + car wash.</p>
 </div>
-
 </div>
 </section>
-
 <section id="book">
 <div class="title">
-<h2>Book Your Service</h2>
-<p>Pick a service and an available time</p>
+<h2>Request an Appointment</h2>
+<p>You must be signed in before requesting a service.</p>
 </div>
-
-<div class="card">
-
+<div id="bookingLoginNotice" class="card">
+<h3>Sign in required</h3>
+<p>
+Create or sign in to your customer account before booking.
+</p>
+<a class="btn dark" href="#account">
+Sign In / Create Account
+</a>
+</div>
+<div id="bookingArea" class="card hidden">
 <form id="bookingForm">
-
 <label>Service</label>
-
-<select id="service">
+<select id="service" required>
 <option value="Lawn Mowing|20">Lawn Mowing — $20</option>
 <option value="Edging|15">Edging — $15</option>
 <option value="Lawn + Edging|35">Lawn + Edging — $35</option>
 <option value="Car Wash|25">Car Wash — $25</option>
 <option value="Complete Package|60">Complete Package — $60</option>
 </select>
-
 <label>Date</label>
 <input id="date" type="date" required>
-
 <label>Time</label>
-
 <select id="time" required>
 <option value="">Select a time</option>
 <option>9:00 AM</option>
@@ -135,659 +299,310 @@ nav{display:none}
 <option>4:00 PM</option>
 <option>5:00 PM</option>
 </select>
-
 <label>Name</label>
 <input id="name" required>
-
 <label>Phone</label>
 <input id="phone" type="tel" required>
-
 <label>Address / Service Location</label>
 <textarea id="address" required></textarea>
-
+<label>Payment Method</label>
+<select id="paymentMethod" required>
+<option value="">
+Choose payment method
+</option>
+<option value="online">
+Pay Online
+</option>
+<option value="in_person">
+Pay In Person After Work
+</option>
+</select>
+<div id="onlineNotice" class="notice hidden">
+Online payment will open after the appointment request.
+Your card information is handled by the payment provider.
+</div>
 <button class="btn dark" type="submit">
-Request Booking
+Request Appointment
 </button>
-
 </form>
-
 <div id="bookMsg"></div>
-
-<p class="small">
-Online payment and automated SMS notifications need a payment/SMS provider connection before they can process real transactions or texts.
-</p>
-
 </div>
 </section>
-
 <section id="account">
-
 <div class="title">
 <h2>Customer Account</h2>
-<p>Keep track of bookings and payments</p>
+<p>Sign in to book and manage your appointments.</p>
 </div>
-
 <div class="grid">
-
 <div class="card">
-
-<h3>Create / Sign In</h3>
-
-<input id="email" type="email" placeholder="Email">
-
-<input id="pw" type="password" placeholder="Password">
-
-<button class="btn dark" onclick="login()">
-Sign In / Create
+<h3>Customer Sign In</h3>
+<label>Email</label>
+<input id="email" type="email" autocomplete="email">
+<label>Password</label>
+<input id="pw" type="password" autocomplete="current-password">
+<button class="btn dark" onclick="signInCustomer()">
+Sign In
 </button>
-
+<button class="btn" onclick="createCustomer()">
+Create Account
+</button>
+<button class="btn" onclick="resetCustomerPassword()">
+Forgot Password
+</button>
 <div id="loginMsg"></div>
-
 </div>
-
 <div class="card">
-
-<h3>My Bookings</h3>
-
+<h3>Account Status</h3>
+<div id="accountStatus">
+Not signed in
+</div>
+<button
+id="customerSignOut"
+class="btn danger hidden"
+onclick="signOutCustomer()">
+Sign Out
+</button>
+</div>
+</div>
+<div id="myBookingsCard" class="card hidden" style="margin-top:20px">
+<h3>My Appointments</h3>
 <div id="myBookings">
-Sign in to see your bookings.
+Loading...
 </div>
-
-</div>
-
 </div>
 </section>
-
 <section id="reviews">
-
 <div class="title">
 <h2>Customer Reviews</h2>
-<p>Real reviews can be added here after jobs are completed</p>
+<p>Reviews are saved to the database.</p>
 </div>
-
 <div id="reviewsBox" class="grid"></div>
-
 <div class="card">
-
 <h3>Leave a Review</h3>
-
-<input id="reviewName" placeholder="Your name">
-
+<div id="reviewLoginNotice" class="notice">
+Sign in to leave a review.
+</div>
+<div id="reviewForm" class="hidden">
+<label>Name</label>
+<input id="reviewName">
+<label>Rating</label>
 <select id="stars">
-<option>5</option>
-<option>4</option>
-<option>3</option>
-<option>2</option>
-<option>1</option>
+<option value="5">5 stars</option>
+<option value="4">4 stars</option>
+<option value="3">3 stars</option>
+<option value="2">2 stars</option>
+<option value="1">1 star</option>
 </select>
-
-<textarea id="reviewText" placeholder="How did we do?"></textarea>
-
+<label>Review</label>
+<textarea id="reviewText"></textarea>
 <button class="btn dark" onclick="addReview()">
 Post Review
 </button>
-
+</div>
+<div id="reviewMsg"></div>
 </div>
 </section>
-
 <section>
-
 <div class="title">
 <h2>FAQ</h2>
 </div>
-
 <div class="grid">
-
 <div class="card">
 <b>What if it rains?</b>
 <p>Outdoor jobs can be rescheduled for safer weather.</p>
 </div>
-
 <div class="card">
 <b>How do I reschedule?</b>
-<p>Use your account or contact A2 directly.</p>
+<p>Contact A2 Outdoor Services and we'll help you out.</p>
 </div>
-
 <div class="card">
-<b>Where do you service?</b>
-<p>Set your service area in the admin settings.</p>
+<b>How do I pay?</b>
+<p>Choose online payment or pay in person after the work is completed.</p>
 </div>
-
 <div class="card">
 <b>Need a custom quote?</b>
 <p>Call or text (325) 206-2463.</p>
 </div>
-
 </div>
 </section>
-
-<section id="ownerLogin" style="display:none">
-
+<section id="ownerLogin">
 <div class="title">
-<h2>Owner Login</h2>
+<h2>Owner Dashboard</h2>
 <p>Private business controls</p>
 </div>
-
-<div class="card" style="max-width:520px;margin:auto">
-
-<p class="small">
-Secure owner sign-in. Your password is handled by the authentication service and is never stored in this website.
-</p>
-
-<label>Email</label>
-
-<input
-id="ownerEmail"
-type="email"
-autocomplete="username"
-placeholder="Owner email"
->
-
-<label>Password</label>
-
-<input
-id="ownerPassword"
-type="password"
-autocomplete="current-password"
-placeholder="Password"
->
-
+<div id="ownerAuthCard" class="card">
+<label>Owner Email</label>
+<input id="ownerEmail" type="email">
+<label>Owner Password</label>
+<input id="ownerPassword" type="password">
 <button class="btn dark" onclick="ownerSignIn()">
-Sign In
+Owner Sign In
 </button>
-
-<button class="btn" onclick="showResetPassword()">
+<button class="btn" onclick="ownerReset()">
 Forgot Password
 </button>
-
-<button
-class="btn"
-onclick="ownerSignOut()"
-id="signOutBtn"
-style="display:none"
->
+<div id="ownerMsg"></div>
+</div>
+<div id="dashboard" class="card hidden">
+<h2>Business Dashboard</h2>
+<p>
+Signed in as
+<b id="signedInEmail"></b>
+</p>
+<button class="btn danger" onclick="ownerSignOut()">
 Sign Out
 </button>
-
-<div id="ownerMsg"></div>
-
+<h3>All Appointments</h3>
+<div id="allBookings">
+Loading...
 </div>
-
-<div
-id="dashboard"
-class="card"
-style="display:none;max-width:900px;margin:25px auto 0"
->
-
-<h2>Owner Dashboard</h2>
-
-<p>
-You're signed in as
-<b id="signedInEmail"></b>.
-</p>
-
-<div class="grid">
-
-<div>
-<h3>Bookings</h3>
-<p>
-Manage upcoming customer bookings from your connected database.
-</p>
-</div>
-
-<div>
-<h3>Availability</h3>
-<p>
-Update the times customers can book.
-</p>
-</div>
-
-<div>
-<h3>Promotions</h3>
-<p>
-Create or disable promo codes.
-</p>
-</div>
-
-<div>
-<h3>Customer accounts</h3>
-<p>
-View customer data only through protected database policies.
-</p>
-</div>
-
-</div>
-
-<div class="notice">
-Production security is enabled through Supabase Authentication + Row Level Security.
-Do not put passwords or secret service keys in this HTML.
-</div>
-
 </div>
 </section>
-
 <footer>
-
-<b id="ownerTrigger" style="cursor:default">
+<b id="ownerTrigger">
 A2 Outdoor Services
 </b>
-
 <p>
 Lawn mowing • Edging • Car washing
 </p>
-
 <p>
-📞 (325) 206-2463 &nbsp; | &nbsp; 📸 @a2outdoorservices
+(325) 206-2463
 </p>
-
+<p>
+@a2outdoorservices
+</p>
 </footer>
-
-<!-- RESET EMAIL MODAL -->
-
-<div class="modal" id="resetModal">
-
-<div class="modalbox">
-
-<h2>Reset Owner Password</h2>
-
-<p>
-Enter your owner email and we'll send you a password reset link.
-</p>
-
-<input
-id="resetEmail"
-type="email"
-placeholder="Owner email"
->
-
-<button
-class="btn dark"
-onclick="sendResetEmail()"
->
-Send Reset Link
-</button>
-
-<button
-class="btn"
-onclick="closeReset()"
->
-Cancel
-</button>
-
-<div id="resetMsg"></div>
-
-</div>
-</div>
-
-<!-- NEW PASSWORD MODAL -->
-
-<div class="modal" id="newPasswordModal">
-
-<div class="modalbox">
-
-<h2>Choose New Password</h2>
-
-<p>
-Enter your new owner password below.
-</p>
-
-<input
-id="newPassword"
-type="password"
-autocomplete="new-password"
-placeholder="New password"
->
-
-<input
-id="confirmPassword"
-type="password"
-autocomplete="new-password"
-placeholder="Confirm new password"
->
-
-<button
-class="btn dark"
-onclick="updateOwnerPassword()"
->
-Update Password
-</button>
-
-<div id="newPasswordMsg"></div>
-
-</div>
-</div>
-
-<!-- PAYMENT MODAL -->
-
-<div class="modal" id="payModal">
-
-<div class="modalbox">
-
-<h2>Payment</h2>
-
-<p>
-Payment is ready to connect to a real payment provider.
-</p>
-
-<p class="notice">
-No card information is collected by this demo.
-</p>
-
-<button
-class="btn dark"
-onclick="closePay()"
->
-Close
-</button>
-
-</div>
-</div>
-
 <script>
-
 const SUPABASE_URL =
 'https://nzqywkzkzrlmxebcvgyt.supabase.co';
-
 const SUPABASE_ANON_KEY =
 'sb_publishable_AZytif7CNFPBPZ2UGVHi4Q_zyIqDYXj';
-
-const supabaseConfigured =
-!SUPABASE_URL.includes('YOUR_') &&
-!SUPABASE_ANON_KEY.includes('YOUR_');
-
 const sb =
-supabaseConfigured
-? window.supabase.createClient(
+window.supabase.createClient(
 SUPABASE_URL,
 SUPABASE_ANON_KEY
-)
-: null;
-
-
-/* OWNER LOGIN */
-
-let ownerTaps = 0;
-let ownerTimer;
-
-const trigger =
-document.getElementById('ownerTrigger');
-
-trigger.addEventListener('click',() => {
-
-ownerTaps++;
-
-clearTimeout(ownerTimer);
-
-ownerTimer =
-setTimeout(
-() => ownerTaps = 0,
-1800
 );
-
-if(ownerTaps >= 5){
-
-document.getElementById(
-'ownerLogin'
-).style.display = 'block';
-
-document.getElementById(
-'ownerLogin'
-).scrollIntoView({
-behavior:'smooth'
-});
-
-ownerTaps = 0;
-
-refreshOwnerUI();
-
+/* BASIC MESSAGE */
+function showMessage(id,text,error=false){
+const box =
+document.getElementById(id);
+box.innerHTML =
+'<div class="notice '+(error?'error':'')+'">'+
+escapeHTML(text)+
+'</div>';
 }
-
-});
-
-
-/* OWNER MESSAGE */
-
-function msg(text){
-
-document.getElementById(
-'ownerMsg'
-).innerHTML =
-'<div class="notice">'+text+'</div>';
-
+/* SECURITY HELPER */
+function escapeHTML(value){
+return String(value ?? '')
+.replace(/&/g,'&amp;')
+.replace(/</g,'&lt;')
+.replace(/>/g,'&gt;')
+.replace(/"/g,'&quot;')
+.replace(/'/g,'&#039;');
 }
-
-
-/* OWNER SIGN IN */
-
-async function ownerSignIn(){
-
-if(!sb){
-
-msg('Owner login is not configured yet.');
-
-return;
-
+/* CURRENT USER */
+async function getCurrentUser(){
+const {
+data:{user}
+} = await sb.auth.getUser();
+return user;
 }
-
+/* CUSTOMER SIGN IN */
+async function signInCustomer(){
 const email =
-document.getElementById(
-'ownerEmail'
-).value.trim();
-
+document.getElementById('email').value.trim();
 const password =
-document.getElementById(
-'ownerPassword'
-).value;
-
+document.getElementById('pw').value;
 if(!email || !password){
-
-msg(
-'Enter your owner email and password.'
+showMessage(
+'loginMsg',
+'Enter your email and password.',
+true
 );
-
 return;
-
 }
-
 const {data,error} =
 await sb.auth.signInWithPassword({
 email,
 password
 });
-
 if(error){
-
-msg(
-'Sign in failed. Check your email and password.'
+showMessage(
+'loginMsg',
+error.message,
+true
 );
-
 return;
-
 }
-
-await refreshOwnerUI(data.user);
-
-}
-
-
-/* OWNER SIGN OUT */
-
-async function ownerSignOut(){
-
-if(sb){
-
-await sb.auth.signOut();
-
-}
-
-refreshOwnerUI(null);
-
-}
-
-
-/* OWNER UI */
-
-async function refreshOwnerUI(userArg){
-
-if(!sb){
-
-document.getElementById(
-'dashboard'
-).style.display='none';
-
-document.getElementById(
-'signOutBtn'
-).style.display='none';
-
-return;
-
-}
-
-const {data:{user}} =
-userArg
-? {data:{user:userArg}}
-: await sb.auth.getUser();
-
-const dashboard =
-document.getElementById('dashboard');
-
-const signOut =
-document.getElementById('signOutBtn');
-
-if(user){
-
-const {data:owner,error:ownerError} =
-await sb
-.from('owner_access')
-.select('user_id')
-.eq('user_id',user.id)
-.maybeSingle();
-
-if(owner && !ownerError){
-
-dashboard.style.display='block';
-
-signOut.style.display='inline-block';
-
-document.getElementById(
-'signedInEmail'
-).textContent =
-user.email || '';
-
-msg(
-'Owner dashboard unlocked.'
+showMessage(
+'loginMsg',
+'You are signed in.'
 );
-
-}else{
-
-await sb.auth.signOut();
-
-dashboard.style.display='none';
-
-signOut.style.display='none';
-
-document.getElementById(
-'signedInEmail'
-).textContent='';
-
-msg(
-'This account is not authorized as the owner.'
-);
-
+updateCustomerUI(data.user);
 }
-
-}else{
-
-dashboard.style.display='none';
-
-signOut.style.display='none';
-
-document.getElementById(
-'signedInEmail'
-).textContent='';
-
-}
-
-}
-
-
-/* SHOW PASSWORD RESET */
-
-function showResetPassword(){
-
+/* CREATE CUSTOMER */
+async function createCustomer(){
 const email =
-document.getElementById(
-'ownerEmail'
-).value.trim();
-
-document.getElementById(
-'resetEmail'
-).value =
-email;
-
-document.getElementById(
-'resetMsg'
-).innerHTML='';
-
-document.getElementById(
-'resetModal'
-).style.display='block';
-
-}
-
-
-/* CLOSE RESET */
-
-function closeReset(){
-
-document.getElementById(
-'resetModal'
-).style.display='none';
-
-}
-
-
-/* SEND RESET EMAIL */
-
-async function sendResetEmail(){
-
-if(!sb){
-
-document.getElementById(
-'resetMsg'
-).innerHTML =
-'<div class="notice">Supabase is not configured.</div>';
-
+document.getElementById('email').value.trim();
+const password =
+document.getElementById('pw').value;
+if(!email || !password){
+showMessage(
+'loginMsg',
+'Enter an email and password first.',
+true
+);
 return;
-
 }
-
+if(password.length < 6){
+showMessage(
+'loginMsg',
+'Password must be at least 6 characters.',
+true
+);
+return;
+}
+const {data,error} =
+await sb.auth.signUp({
+email,
+password
+});
+if(error){
+showMessage(
+'loginMsg',
+error.message,
+true
+);
+return;
+}
+if(data.session){
+showMessage(
+'loginMsg',
+'Account created and signed in.'
+);
+updateCustomerUI(data.user);
+}else{
+showMessage(
+'loginMsg',
+'Account created. Check your email to confirm your account before signing in.'
+);
+}
+}
+/* CUSTOMER PASSWORD RESET */
+async function resetCustomerPassword(){
 const email =
-document.getElementById(
-'resetEmail'
-).value.trim();
-
+document.getElementById('email').value.trim();
 if(!email){
-
-document.getElementById(
-'resetMsg'
-).innerHTML =
-'<div class="notice">Enter your owner email.</div>';
-
+showMessage(
+'loginMsg',
+'Enter your email first.',
+true
+);
 return;
-
 }
-
-
-/*
-IMPORTANT:
-This must also be added to Supabase
-Authentication > URL Configuration > Redirect URLs
-*/
-
 const redirectUrl =
-'https://84p86m5r96-blip.github.io/-a2-outdoor-services/';
-
+window.location.origin +
+window.location.pathname;
 const {error} =
 await sb.auth.resetPasswordForEmail(
 email,
@@ -795,300 +610,577 @@ email,
 redirectTo:redirectUrl
 }
 );
-
 if(error){
-
-document.getElementById(
-'resetMsg'
-).innerHTML =
-'<div class="notice">Could not send the reset email. Check your Supabase redirect URL settings.</div>';
-
+showMessage(
+'loginMsg',
+error.message,
+true
+);
 return;
-
 }
-
+showMessage(
+'loginMsg',
+'Password reset email sent. Check your inbox.'
+);
+}
+/* CUSTOMER SIGN OUT */
+async function signOutCustomer(){
+await sb.auth.signOut();
+updateCustomerUI(null);
+}
+/* UPDATE CUSTOMER UI */
+async function updateCustomerUI(user){
+if(!user){
 document.getElementById(
-'resetMsg'
-).innerHTML =
-'<div class="notice">Reset link sent. Check your email.</div>';
-
-}
-
-
-/* UPDATE PASSWORD */
-
-async function updateOwnerPassword(){
-
-if(!sb){
-
+'accountStatus'
+).textContent =
+'Not signed in';
+document.getElementById(
+'customerSignOut'
+).classList.add('hidden');
+document.getElementById(
+'bookingArea'
+).classList.add('hidden');
+document.getElementById(
+'bookingLoginNotice'
+).classList.remove('hidden');
+document.getElementById(
+'myBookingsCard'
+).classList.add('hidden');
+document.getElementById(
+'reviewForm'
+).classList.add('hidden');
+document.getElementById(
+'reviewLoginNotice'
+).classList.remove('hidden');
 return;
-
 }
-
-const password =
 document.getElementById(
-'newPassword'
-).value;
-
-const confirm =
-document.getElementById(
-'confirmPassword'
-).value;
-
-if(!password || password.length < 6){
-
-document.getElementById(
-'newPasswordMsg'
+'accountStatus'
 ).innerHTML =
-'<div class="notice">Password must be at least 6 characters.</div>';
-
-return;
-
-}
-
-if(password !== confirm){
-
+'<b>Signed in</b><br>'+
+escapeHTML(user.email);
 document.getElementById(
-'newPasswordMsg'
-).innerHTML =
-'<div class="notice">The passwords do not match.</div>';
-
-return;
-
+'customerSignOut'
+).classList.remove('hidden');
+document.getElementById(
+'bookingArea'
+).classList.remove('hidden');
+document.getElementById(
+'bookingLoginNotice'
+).classList.add('hidden');
+document.getElementById(
+'myBookingsCard'
+).classList.remove('hidden');
+document.getElementById(
+'reviewForm'
+).classList.remove('hidden');
+document.getElementById(
+'reviewLoginNotice'
+).classList.add('hidden');
+loadMyBookings();
 }
-
+/* BOOKING */
+document
+.getElementById('bookingForm')
+.addEventListener('submit',async function(e){
+e.preventDefault();
+const user =
+await getCurrentUser();
+if(!user){
+showMessage(
+'bookMsg',
+'You must sign in before requesting an appointment.',
+true
+);
+return;
+}
+const serviceData =
+document.getElementById('service').value.split('|');
+const service =
+serviceData[0];
+const price =
+Number(serviceData[1]);
+const paymentMethod =
+document.getElementById('paymentMethod').value;
+if(!paymentMethod){
+showMessage(
+'bookMsg',
+'Choose a payment method.',
+true
+);
+return;
+}
+const booking = {
+user_id:user.id,
+name:
+document.getElementById('name').value.trim(),
+phone:
+document.getElementById('phone').value.trim(),
+address:
+document.getElementById('address').value.trim(),
+service:service,
+price:price,
+appointment_date:
+document.getElementById('date').value,
+appointment_time:
+document.getElementById('time').value,
+payment_method:paymentMethod,
+payment_status:
+paymentMethod === 'in_person'
+? 'pay_after_service'
+: 'awaiting_online_payment',
+booking_status:'pending'
+};
+if(
+!booking.name ||
+!booking.phone ||
+!booking.address ||
+!booking.appointment_date ||
+!booking.appointment_time
+){
+showMessage(
+'bookMsg',
+'Please fill out every field.',
+true
+);
+return;
+}
+const {data,error} =
+await sb
+.from('bookings')
+.insert(booking)
+.select()
+.single();
+if(error){
+showMessage(
+'bookMsg',
+error.message,
+true
+);
+return;
+}
+if(paymentMethod === 'online'){
+showMessage(
+'bookMsg',
+'Appointment requested. Online payment is ready to be connected to Stripe. The appointment is currently waiting for payment.'
+);
+}else{
+showMessage(
+'bookMsg',
+'Appointment requested. Your payment method is Pay In Person After Work.'
+);
+}
+document
+.getElementById('bookingForm')
+.reset();
+loadMyBookings();
+});
+/* PAYMENT LABEL */
+document
+.getElementById('paymentMethod')
+.addEventListener('change',function(){
+const notice =
+document.getElementById('onlineNotice');
+if(this.value === 'online'){
+notice.classList.remove('hidden');
+}else{
+notice.classList.add('hidden');
+}
+});
+/* LOAD CUSTOMER BOOKINGS */
+async function loadMyBookings(){
+const user =
+await getCurrentUser();
+if(!user) return;
+const {data,error} =
+await sb
+.from('bookings')
+.select('*')
+.eq('user_id',user.id)
+.order('created_at',{
+ascending:false
+});
+const box =
+document.getElementById('myBookings');
+if(error){
+box.innerHTML =
+'<div class="notice error">'+
+escapeHTML(error.message)+
+'</div>';
+return;
+}
+if(!data || data.length === 0){
+box.innerHTML =
+'<p>No appointments yet.</p>';
+return;
+}
+box.innerHTML =
+data.map(b => `
+<div class="booking">
+<h3>${escapeHTML(b.service)}</h3>
+<p>
+<b>Date:</b>
+${escapeHTML(b.appointment_date)}
+</p>
+<p>
+<b>Time:</b>
+${escapeHTML(b.appointment_time)}
+</p>
+<p>
+<b>Price:</b>
+$${Number(b.price).toFixed(2)}
+</p>
+<p>
+<b>Payment:</b>
+${b.payment_method === 'online'
+? 'Pay Online'
+: 'Pay In Person After Work'}
+</p>
+<p>
+<b>Status:</b>
+<span class="status">
+${escapeHTML(b.booking_status)}
+</span>
+</p>
+</div>
+`).join('');
+}
+/* REVIEWS */
+async function loadReviews(){
+const {data,error} =
+await sb
+.from('reviews')
+.select('*')
+.order('created_at',{
+ascending:false
+});
+const box =
+document.getElementById('reviewsBox');
+if(error){
+box.innerHTML =
+'<div class="notice error">'+
+escapeHTML(error.message)+
+'</div>';
+return;
+}
+if(!data || data.length === 0){
+box.innerHTML =
+'<p>No reviews yet.</p>';
+return;
+}
+box.innerHTML =
+data.map(r => `
+<div class="card">
+<h3>${escapeHTML(r.name)}</h3>
+<p>
+${'★'.repeat(Number(r.stars))}
+${'☆'.repeat(5-Number(r.stars))}
+</p>
+<p>
+${escapeHTML(r.review_text)}
+</p>
+</div>
+`).join('');
+}
+/* ADD REVIEW */
+async function addReview(){
+const user =
+await getCurrentUser();
+if(!user){
+showMessage(
+'reviewMsg',
+'You must sign in first.',
+true
+);
+return;
+}
+const name =
+document.getElementById('reviewName')
+.value.trim();
+const text =
+document.getElementById('reviewText')
+.value.trim();
+const stars =
+Number(
+document.getElementById('stars').value
+);
+if(!name || !text){
+showMessage(
+'reviewMsg',
+'Enter your name and review.',
+true
+);
+return;
+}
 const {error} =
-await sb.auth.updateUser({
-password:password
+await sb
+.from('reviews')
+.insert({
+user_id:user.id,
+name:name,
+stars:stars,
+review_text:text
 });
-
 if(error){
-
-document.getElementById(
-'newPasswordMsg'
-).innerHTML =
-'<div class="notice">Password update failed. Try the reset link again.</div>';
-
+showMessage(
+'reviewMsg',
+error.message,
+true
+);
 return;
-
 }
-
+showMessage(
+'reviewMsg',
+'Review posted.'
+);
 document.getElementById(
-'newPasswordMsg'
-).innerHTML =
-'<div class="notice">Password updated successfully. You can now sign in.</div>';
-
-setTimeout(() => {
-
+'reviewName'
+).value='';
 document.getElementById(
-'newPasswordModal'
-).style.display='none';
-
-},1500);
-
+'reviewText'
+).value='';
+loadReviews();
 }
-
-
-/* PASSWORD RECOVERY */
-
-if(sb){
-
-sb.auth.onAuthStateChange(
-async(event,session) => {
-
-if(event === 'PASSWORD_RECOVERY'){
-
+/* OWNER SECRET ENTRY */
+let ownerTaps = 0;
+let ownerTimer;
+document
+.getElementById('ownerTrigger')
+.addEventListener('click',function(){
+ownerTaps++;
+clearTimeout(ownerTimer);
+ownerTimer =
+setTimeout(
+()=>ownerTaps=0,
+1800
+);
+if(ownerTaps >= 5){
 document.getElementById(
-'newPasswordModal'
+'ownerLogin'
 ).style.display='block';
-
-}
-
-if(event === 'SIGNED_IN' && session){
-
-refreshOwnerUI(session.user);
-
-}
-
+document.getElementById(
+'ownerLogin'
+).scrollIntoView({
+behavior:'smooth'
 });
-
+ownerTaps=0;
 }
-
-
-/* CUSTOMER LOGIN */
-
-async function login(){
-
-if(!sb){
-
-document.getElementById(
-'loginMsg'
-).innerHTML =
-'<div class="notice">Login is not configured.</div>';
-
-return;
-
-}
-
+});
+/* OWNER SIGN IN */
+async function ownerSignIn(){
 const email =
-document.getElementById(
-'email'
-).value.trim();
-
+document.getElementById('ownerEmail')
+.value.trim();
 const password =
-document.getElementById(
-'pw'
-).value;
-
+document.getElementById('ownerPassword')
+.value;
 if(!email || !password){
-
-document.getElementById(
-'loginMsg'
-).innerHTML =
-'<div class="notice">Enter an email and password.</div>';
-
+showMessage(
+'ownerMsg',
+'Enter your owner email and password.',
+true
+);
 return;
-
 }
-
-let result =
+const {data,error} =
 await sb.auth.signInWithPassword({
 email,
 password
 });
-
-if(result.error){
-
-result =
-await sb.auth.signUp({
-email,
-password
-});
-
-}
-
-if(result.error){
-
-document.getElementById(
-'loginMsg'
-).innerHTML =
-'<div class="notice">'+
-result.error.message+
-'</div>';
-
+if(error){
+showMessage(
+'ownerMsg',
+error.message,
+true
+);
 return;
-
 }
-
-document.getElementById(
-'loginMsg'
-).innerHTML =
-'<div class="notice">You are signed in.</div>';
-
-}
-
-
-/* REVIEWS */
-
-function addReview(){
-
-const name =
-document.getElementById(
-'reviewName'
-).value.trim();
-
-const text =
-document.getElementById(
-'reviewText'
-).value.trim();
-
-const stars =
-document.getElementById(
-'stars'
-).value;
-
-if(!name || !text) return;
-
-const box =
-document.getElementById(
-'reviewsBox'
+const {data:owner,error:ownerError} =
+await sb
+.from('owner_access')
+.select('user_id')
+.eq('user_id',data.user.id)
+.maybeSingle();
+if(ownerError || !owner){
+await sb.auth.signOut();
+showMessage(
+'ownerMsg',
+'This account is not authorized as the owner.',
+true
 );
-
-const card =
-document.createElement('div');
-
-card.className='card';
-
-card.innerHTML =
-'<h3>'+name+'</h3>'+
-'<p>'+stars+' stars</p>'+
-'<p>'+text+'</p>';
-
-box.appendChild(card);
-
-document.getElementById(
-'reviewName'
-).value='';
-
-document.getElementById(
-'reviewText'
-).value='';
-
+return;
 }
-
-
-/* BOOKING */
-
-const bookingForm =
 document.getElementById(
-'bookingForm'
-);
-
-if(bookingForm){
-
-bookingForm.addEventListener(
-'submit',
-e => {
-
-e.preventDefault();
-
+'ownerAuthCard'
+).classList.add('hidden');
 document.getElementById(
-'bookMsg'
-).innerHTML =
-'<div class="notice">Booking request received. We will contact you to confirm.</div>';
-
-bookingForm.reset();
-
+'dashboard'
+).classList.remove('hidden');
+document.getElementById(
+'signedInEmail'
+).textContent =
+data.user.email || '';
+loadAllBookings();
+}
+/* OWNER SIGN OUT */
+async function ownerSignOut(){
+await sb.auth.signOut();
+document.getElementById(
+'ownerAuthCard'
+).classList.remove('hidden');
+document.getElementById(
+'dashboard'
+).classList.add('hidden');
+}
+/* OWNER BOOKINGS */
+async function loadAllBookings(){
+const {data,error} =
+await sb
+.from('bookings')
+.select('*')
+.order('appointment_date',{
+ascending:true
 });
-
+const box =
+document.getElementById('allBookings');
+if(error){
+box.innerHTML =
+'<div class="notice error">'+
+escapeHTML(error.message)+
+'</div>';
+return;
 }
-
-
-/* MODALS */
-
-function showModal(id){
-
-document.getElementById(
-id
-).style.display='block';
-
+if(!data || data.length===0){
+box.innerHTML =
+'<p>No appointments yet.</p>';
+return;
 }
-
-function closeModal(id){
-
-document.getElementById(
-id
-).style.display='none';
-
+box.innerHTML =
+data.map(b => `
+<div class="booking">
+<h3>
+${escapeHTML(b.service)}
+</h3>
+<p>
+<b>Customer:</b>
+${escapeHTML(b.name)}
+</p>
+<p>
+<b>Phone:</b>
+${escapeHTML(b.phone)}
+</p>
+<p>
+<b>Address:</b>
+${escapeHTML(b.address)}
+</p>
+<p>
+<b>Date:</b>
+${escapeHTML(b.appointment_date)}
+</p>
+<p>
+<b>Time:</b>
+${escapeHTML(b.appointment_time)}
+</p>
+<p>
+<b>Price:</b>
+$${Number(b.price).toFixed(2)}
+</p>
+<p>
+<b>Payment:</b>
+${b.payment_method === 'online'
+? 'Online'
+: 'Pay In Person'}
+</p>
+<p>
+<b>Status:</b>
+${escapeHTML(b.booking_status)}
+</p>
+<button
+class="btn dark"
+onclick="updateBookingStatus('${b.id}','confirmed')">
+Confirm
+</button>
+<button
+class="btn"
+onclick="updateBookingStatus('${b.id}','completed')">
+Completed
+</button>
+<button
+class="btn danger"
+onclick="updateBookingStatus('${b.id}','cancelled')">
+Cancel
+</button>
+</div>
+`).join('');
 }
-
-function closePay(){
-
-closeModal('payModal');
-
+/* UPDATE BOOKING */
+async function updateBookingStatus(id,status){
+const {error} =
+await sb
+.from('bookings')
+.update({
+booking_status:status
+})
+.eq('id',id);
+if(error){
+alert(error.message);
+return;
 }
-
+loadAllBookings();
+}
+/* OWNER RESET */
+async function ownerReset(){
+const email =
+document.getElementById('ownerEmail')
+.value.trim();
+if(!email){
+showMessage(
+'ownerMsg',
+'Enter the owner email first.',
+true
+);
+return;
+}
+const redirectUrl =
+window.location.origin +
+window.location.pathname;
+const {error} =
+await sb.auth.resetPasswordForEmail(
+email,
+{
+redirectTo:redirectUrl
+}
+);
+if(error){
+showMessage(
+'ownerMsg',
+error.message,
+true
+);
+return;
+}
+showMessage(
+'ownerMsg',
+'Password reset email sent.'
+);
+}
+/* AUTH STATE */
+sb.auth.onAuthStateChange(
+async(event,session)=>{
+if(session && session.user){
+updateCustomerUI(session.user);
+}else{
+updateCustomerUI(null);
+}
+});
+/* INITIAL LOAD */
+(async()=>{
+const user =
+await getCurrentUser();
+updateCustomerUI(user);
+loadReviews();
+})();
 </script>
-
 </body>
 </html>
