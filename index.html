@@ -2,34 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>A2 Outdoor Services</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+*{box-sizing:border-box}
 
 body{
-  font-family:Arial,Helvetica,sans-serif;
+  margin:0;
+  font-family:Arial,sans-serif;
   background:#f5f7f3;
   color:#142015;
-  line-height:1.5;
 }
 
 header{
   background:#102714;
   color:white;
-  padding:20px 7%;
+  padding:22px 7%;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:20px;
   position:sticky;
   top:0;
   z-index:100;
@@ -38,6 +33,7 @@ header{
 .logo{
   font-size:24px;
   font-weight:900;
+  cursor:pointer;
 }
 
 nav{
@@ -53,15 +49,15 @@ nav a{
 }
 
 .hero{
-  background:linear-gradient(135deg,#102714,#245b2c);
+  background:linear-gradient(135deg,#102714,#286b32);
   color:white;
-  padding:80px 7%;
   text-align:center;
+  padding:85px 7%;
 }
 
 .hero h1{
-  font-size:clamp(40px,8vw,72px);
-  margin-bottom:15px;
+  font-size:clamp(42px,8vw,72px);
+  margin:0 0 15px;
 }
 
 .hero p{
@@ -70,34 +66,10 @@ nav a{
   margin:0 auto 25px;
 }
 
-.btn{
-  border:none;
-  background:#2f7d32;
-  color:white;
-  padding:13px 20px;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:bold;
-  font-size:15px;
-}
-
-.btn:hover{
-  opacity:.9;
-}
-
-.btn.secondary{
-  background:#dce9dc;
-  color:#142015;
-}
-
-.btn.danger{
-  background:#b3261e;
-}
-
 section{
-  padding:60px 7%;
   max-width:1200px;
   margin:auto;
+  padding:60px 7%;
 }
 
 h2{
@@ -119,13 +91,13 @@ h2{
 }
 
 .card h3{
-  margin-bottom:10px;
+  margin-top:0;
 }
 
 .price{
-  font-size:25px;
-  font-weight:900;
   color:#246b2a;
+  font-size:26px;
+  font-weight:900;
   margin-top:12px;
 }
 
@@ -136,14 +108,24 @@ form{
   box-shadow:0 5px 20px rgba(0,0,0,.07);
 }
 
-input,
-select,
-textarea{
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-top:8px;
+}
+
+input,select,textarea{
   width:100%;
   padding:13px;
+  margin:7px 0 15px;
   border:1px solid #ccd5cc;
   border-radius:9px;
-  margin:7px 0 15px;
   font-size:15px;
 }
 
@@ -152,22 +134,31 @@ textarea{
   resize:vertical;
 }
 
-label{
+.btn{
+  border:0;
+  background:#2f7d32;
+  color:white;
+  padding:13px 20px;
+  border-radius:10px;
+  cursor:pointer;
   font-weight:bold;
+  font-size:15px;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
+.btn:hover{
+  opacity:.9;
+}
+
+.danger{
+  background:#b3261e;
 }
 
 .notice{
   background:#edf7ed;
   border:1px solid #b7d8b7;
-  padding:18px;
+  padding:17px;
   border-radius:12px;
-  margin:15px 0;
+  margin:12px 0;
 }
 
 .error{
@@ -176,11 +167,11 @@ label{
   color:#8b1e1e;
   padding:14px;
   border-radius:10px;
-  margin:10px 0;
+  margin:12px 0;
 }
 
 .hidden{
-  display:none !important;
+  display:none!important;
 }
 
 .payment-box{
@@ -191,8 +182,14 @@ label{
   margin:15px 0;
 }
 
-.payment-box strong{
-  color:#173d1b;
+.payment-box h3{
+  margin-top:0;
+}
+
+.payment-amount{
+  font-size:28px;
+  font-weight:900;
+  color:#246b2a;
 }
 
 .booking-list{
@@ -202,8 +199,8 @@ label{
 
 .booking{
   background:white;
-  border-radius:14px;
   padding:20px;
+  border-radius:14px;
   box-shadow:0 4px 15px rgba(0,0,0,.06);
 }
 
@@ -213,7 +210,6 @@ label{
   border-radius:20px;
   background:#e5eee5;
   font-weight:bold;
-  margin-top:8px;
 }
 
 .review{
@@ -232,19 +228,20 @@ label{
 footer{
   background:#102714;
   color:white;
-  padding:30px 7%;
   text-align:center;
-  margin-top:50px;
+  padding:30px 7%;
+}
+
+.small{
+  font-size:13px;
+  opacity:.8;
 }
 
 @media(max-width:700px){
   header{
     flex-direction:column;
     align-items:flex-start;
-  }
-
-  nav{
-    gap:10px;
+    gap:15px;
   }
 
   .grid{
@@ -261,7 +258,10 @@ footer{
 <body>
 
 <header>
-  <div class="logo">A2 Outdoor Services</div>
+
+  <div class="logo" id="ownerTrigger">
+    A2 Outdoor Services
+  </div>
 
   <nav>
     <a href="#services">Services</a>
@@ -269,48 +269,80 @@ footer{
     <a href="#account">Account</a>
     <a href="#reviews">Reviews</a>
   </nav>
+
 </header>
 
+
 <section class="hero">
+
   <h1>A2 Outdoor Services</h1>
-  <p>Reliable outdoor services that keep your property looking clean and taken care of.</p>
+
+  <p>
+    Reliable outdoor services to keep your property looking clean and taken care of.
+  </p>
+
   <a href="#booking">
     <button class="btn">Book a Service</button>
   </a>
+
 </section>
 
+
+<!-- SERVICES -->
+
 <section id="services">
+
   <h2>Our Services</h2>
 
   <div class="services">
 
     <div class="card">
-      <h3>Lawn Mowing</h3>
-      <p>Professional lawn mowing and basic yard maintenance.</p>
-      <div class="price">$50</div>
+      <h3>🚗 Car Wash</h3>
+      <p>
+        Get your vehicle cleaned and looking fresh.
+      </p>
+      <div class="price">$25</div>
     </div>
 
     <div class="card">
-      <h3>Yard Cleanup</h3>
-      <p>Leaves, branches, debris and general outdoor cleanup.</p>
-      <div class="price">$100</div>
+      <h3>🌱 Lawn Mowing</h3>
+      <p>
+        Keep your lawn clean, maintained, and freshly cut.
+      </p>
+      <div class="price">$20</div>
     </div>
 
     <div class="card">
-      <h3>Pressure Washing</h3>
-      <p>Clean outdoor surfaces and help bring them back to life.</p>
-      <div class="price">$150</div>
+      <h3>✂️ Edging</h3>
+      <p>
+        Clean, sharp edges around your lawn and property.
+      </p>
+      <div class="price">$15</div>
+    </div>
+
+    <div class="card">
+      <h3>⭐ Complete Package</h3>
+      <p>
+        Car Wash + Lawn Mowing + Edging.
+      </p>
+      <div class="price">$60</div>
     </div>
 
   </div>
+
 </section>
 
+
+<!-- ACCOUNT -->
+
 <section id="account">
+
   <h2>Customer Account</h2>
 
   <div id="loggedOut">
 
     <form id="loginForm">
+
       <h3>Sign In</h3>
 
       <label>Email</label>
@@ -319,38 +351,56 @@ footer{
       <label>Password</label>
       <input id="loginPassword" type="password" required>
 
-      <button class="btn" type="submit">Sign In</button>
+      <button class="btn" type="submit">
+        Sign In
+      </button>
 
       <div id="loginError" class="error hidden"></div>
+
     </form>
 
     <br>
 
     <form id="signupForm">
+
       <h3>Create Account</h3>
 
       <label>Email</label>
       <input id="signupEmail" type="email" required>
 
       <label>Password</label>
-      <input id="signupPassword" type="password" minlength="6" required>
+      <input
+        id="signupPassword"
+        type="password"
+        minlength="6"
+        required
+      >
 
-      <button class="btn" type="submit">Create Account</button>
+      <button class="btn" type="submit">
+        Create Account
+      </button>
 
       <div id="signupMessage" class="notice hidden"></div>
       <div id="signupError" class="error hidden"></div>
+
     </form>
 
   </div>
 
+
   <div id="loggedIn" class="hidden">
 
     <div class="notice">
-      <strong>You are signed in.</strong>
+
+      <strong>You're signed in.</strong>
+
       <p id="accountEmail"></p>
+
     </div>
 
-    <button class="btn danger" onclick="signOut()">Sign Out</button>
+    <button class="btn danger" onclick="signOut()">
+      Sign Out
+    </button>
 
     <br><br>
 
@@ -361,15 +411,22 @@ footer{
     </div>
 
   </div>
+
 </section>
+
+
+<!-- BOOKING -->
 
 <section id="booking">
 
   <h2>Book a Service</h2>
 
   <div id="bookingLoginNotice" class="notice">
+
     You must be signed in before you can request an appointment.
+
   </div>
+
 
   <div id="bookingArea" class="hidden">
 
@@ -378,59 +435,122 @@ footer{
       <div class="grid">
 
         <div>
+
           <label>Name</label>
-          <input id="bookingName" required>
+
+          <input
+            id="bookingName"
+            required
+          >
+
         </div>
 
         <div>
+
           <label>Phone</label>
-          <input id="bookingPhone" type="tel" required>
+
+          <input
+            id="bookingPhone"
+            type="tel"
+            required
+          >
+
         </div>
 
       </div>
 
+
       <label>Address</label>
-      <input id="bookingAddress" required>
+
+      <input
+        id="bookingAddress"
+        required
+      >
+
 
       <label>Service</label>
 
-      <select id="service" required onchange="updatePaymentDetails()">
+      <select
+        id="service"
+        required
+        onchange="updatePaymentDetails()"
+      >
 
-        <option value="">Choose a service</option>
-
-        <option value="Lawn Mowing" data-price="50">
-          Lawn Mowing — $50
+        <option value="">
+          Choose a service
         </option>
 
-        <option value="Yard Cleanup" data-price="100">
-          Yard Cleanup — $100
+        <option
+          value="Car Wash"
+          data-price="25"
+        >
+          Car Wash — $25
         </option>
 
-        <option value="Pressure Washing" data-price="150">
-          Pressure Washing — $150
+        <option
+          value="Lawn Mowing"
+          data-price="20"
+        >
+          Lawn Mowing — $20
+        </option>
+
+        <option
+          value="Edging"
+          data-price="15"
+        >
+          Edging — $15
+        </option>
+
+        <option
+          value="Complete Package"
+          data-price="60"
+        >
+          Complete Package — $60
         </option>
 
       </select>
 
+
       <div class="grid">
 
         <div>
+
           <label>Appointment Date</label>
-          <input id="appointmentDate" type="date" required>
+
+          <input
+            id="appointmentDate"
+            type="date"
+            required
+          >
+
         </div>
 
         <div>
+
           <label>Appointment Time</label>
-          <input id="appointmentTime" type="time" required>
+
+          <input
+            id="appointmentTime"
+            type="time"
+            required
+          >
+
         </div>
 
       </div>
 
+
       <label>Payment Method</label>
 
-      <select id="paymentMethod" required onchange="updatePaymentDetails()">
+      <select
+        id="paymentMethod"
+        required
+        onchange="updatePaymentDetails()"
+      >
 
-        <option value="">Choose payment method</option>
+        <option value="">
+          Choose payment method
+        </option>
 
         <option value="cash_app">
           Cash App — $Txaaden
@@ -442,64 +562,110 @@ footer{
 
       </select>
 
+
       <!-- AUTOMATIC PAYMENT DETAILS -->
 
-      <div id="paymentDetails" class="payment-box hidden">
+      <div
+        id="paymentDetails"
+        class="payment-box hidden"
+      >
 
         <h3>Payment Details</h3>
 
         <p>
           <strong>Amount to send:</strong>
-          <span id="paymentAmount">$0.00</span>
         </p>
 
-        <div id="cashAppInfo" class="hidden">
+        <div
+          id="paymentAmount"
+          class="payment-amount"
+        >
+          $0.00
+        </div>
+
+
+        <div
+          id="cashAppInfo"
+          class="hidden"
+        >
 
           <p>
-            <strong>Cash App:</strong> $Txaaden
+            <strong>Cash App:</strong>
+            $Txaaden
           </p>
 
           <p>
-            Send the exact amount shown above.
+            Send exactly the amount shown above.
           </p>
 
           <button
             type="button"
             class="btn"
-            onclick="openCashApp()">
+            onclick="openCashApp()"
+          >
             Open Cash App
           </button>
 
-          <p style="margin-top:10px;font-size:13px;">
-            Your payment will remain pending until A2 Outdoor Services
-            verifies that the payment was received.
+          <p class="small">
+            After sending the payment, your payment will
+            remain pending until A2 Outdoor Services verifies
+            that it was received.
           </p>
 
         </div>
 
-        <div id="inPersonInfo" class="hidden">
+
+        <div
+          id="inPersonInfo"
+          class="hidden"
+        >
 
           <p>
-            You can pay the exact service amount in person after the work
-            is completed.
+            You selected pay in person.
+          </p>
+
+          <p>
+            Amount due:
+            <strong id="inPersonAmount">
+              $0.00
+            </strong>
+          </p>
+
+          <p class="small">
+            Payment can be made after the work is completed.
           </p>
 
         </div>
 
       </div>
 
-      <button class="btn" type="submit">
+
+      <button
+        class="btn"
+        type="submit"
+      >
         Request Appointment
       </button>
 
-      <div id="bookingMessage" class="notice hidden"></div>
-      <div id="bookingError" class="error hidden"></div>
+
+      <div
+        id="bookingMessage"
+        class="notice hidden"
+      ></div>
+
+      <div
+        id="bookingError"
+        class="error hidden"
+      ></div>
 
     </form>
 
   </div>
 
 </section>
+
+
+<!-- REVIEWS -->
 
 <section id="reviews">
 
@@ -509,99 +675,156 @@ footer{
     <p>Loading reviews...</p>
   </div>
 
-  <br>
 
-  <div id="reviewLoginNotice" class="notice">
+  <div
+    id="reviewLoginNotice"
+    class="notice"
+  >
     Sign in to leave a review.
   </div>
 
-  <form id="reviewForm" class="hidden">
+
+  <form
+    id="reviewForm"
+    class="hidden"
+  >
 
     <h3>Leave a Review</h3>
 
     <label>Your Name</label>
-    <input id="reviewName" required>
+
+    <input
+      id="reviewName"
+      required
+    >
+
 
     <label>Rating</label>
 
-    <select id="reviewStars" required>
-      <option value="">Choose rating</option>
-      <option value="5">5 Stars</option>
-      <option value="4">4 Stars</option>
-      <option value="3">3 Stars</option>
-      <option value="2">2 Stars</option>
-      <option value="1">1 Star</option>
+    <select
+      id="reviewStars"
+      required
+    >
+
+      <option value="">
+        Choose rating
+      </option>
+
+      <option value="5">★★★★★ — 5 Stars</option>
+      <option value="4">★★★★ — 4 Stars</option>
+      <option value="3">★★★ — 3 Stars</option>
+      <option value="2">★★ — 2 Stars</option>
+      <option value="1">★ — 1 Star</option>
+
     </select>
 
-    <label>Review</label>
-    <textarea id="reviewText" required></textarea>
 
-    <button class="btn" type="submit">
+    <label>Review</label>
+
+    <textarea
+      id="reviewText"
+      required
+    ></textarea>
+
+
+    <button
+      class="btn"
+      type="submit"
+    >
       Submit Review
     </button>
 
-    <div id="reviewMessage" class="notice hidden"></div>
-    <div id="reviewError" class="error hidden"></div>
+
+    <div
+      id="reviewMessage"
+      class="notice hidden"
+    ></div>
+
+    <div
+      id="reviewError"
+      class="error hidden"
+    ></div>
 
   </form>
 
 </section>
 
-<section id="owner" class="hidden">
+
+<!-- OWNER DASHBOARD -->
+
+<section
+  id="owner"
+  class="hidden"
+>
 
   <h2>Owner Dashboard</h2>
 
   <div class="notice">
-    <strong>Owner account:</strong>
+
+    <strong>Owner:</strong>
+
     <span id="ownerEmail"></span>
+
   </div>
 
-  <button class="btn danger" onclick="ownerSignOut()">
+
+  <button
+    class="btn danger"
+    onclick="ownerSignOut()"
+  >
     Owner Sign Out
   </button>
+
 
   <br><br>
 
   <h3>All Bookings</h3>
 
-  <div id="ownerBookings" class="booking-list">
+  <div
+    id="ownerBookings"
+    class="booking-list"
+  >
     <p>Loading...</p>
   </div>
 
 </section>
 
+
 <footer>
 
-  <p>© 2026 A2 Outdoor Services</p>
+  <p>
+    © 2026 A2 Outdoor Services
+  </p>
 
-  <p style="margin-top:8px;">
+  <p>
     Quality outdoor service you can count on.
   </p>
 
 </footer>
 
+
 <script>
 
-/* ================================
+/* =========================================
    SUPABASE
-================================ */
+========================================= */
 
 const SUPABASE_URL =
-  "https://nzqywkzkzrlmxebcvgyt.supabase.co";
+"https://nzqywkzkzrlmxebcvgyt.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_AZytif7CNFPBPZ2UGVHi4Q_zyIqDYXj";
+"sb_publishable_AZytif7CNFPBPZ2UGVHi4Q_zyIqDYXj";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-/* ================================
+/* =========================================
    CASH APP
-================================ */
+========================================= */
 
 const CASH_APP_TAG = "$Txaaden";
 
@@ -613,9 +836,9 @@ function openCashApp(){
 }
 
 
-/* ================================
+/* =========================================
    PAYMENT DETAILS
-================================ */
+========================================= */
 
 function updatePaymentDetails(){
 
@@ -625,47 +848,77 @@ function updatePaymentDetails(){
   const paymentMethod =
     document.getElementById("paymentMethod");
 
-  const selectedService =
-    service.options[service.selectedIndex];
+  const selected =
+    service.options[
+      service.selectedIndex
+    ];
 
   const price =
-    selectedService?.dataset?.price || "0";
+    selected?.dataset?.price || "0";
 
   const method =
     paymentMethod.value;
 
-  const box =
-    document.getElementById("paymentDetails");
+  const paymentBox =
+    document.getElementById(
+      "paymentDetails"
+    );
 
-  const amount =
-    document.getElementById("paymentAmount");
+  const paymentAmount =
+    document.getElementById(
+      "paymentAmount"
+    );
 
   const cashAppInfo =
-    document.getElementById("cashAppInfo");
+    document.getElementById(
+      "cashAppInfo"
+    );
 
   const inPersonInfo =
-    document.getElementById("inPersonInfo");
+    document.getElementById(
+      "inPersonInfo"
+    );
+
+  const inPersonAmount =
+    document.getElementById(
+      "inPersonAmount"
+    );
+
 
   if(!method || price === "0"){
 
-    box.classList.add("hidden");
+    paymentBox.classList.add("hidden");
 
     return;
+
   }
 
-  box.classList.remove("hidden");
 
-  amount.textContent =
+  paymentBox.classList.remove("hidden");
+
+
+  const formattedPrice =
     "$" + Number(price).toFixed(2);
 
+
+  paymentAmount.textContent =
+    formattedPrice;
+
+  inPersonAmount.textContent =
+    formattedPrice;
+
+
   cashAppInfo.classList.add("hidden");
+
   inPersonInfo.classList.add("hidden");
+
 
   if(method === "cash_app"){
 
     cashAppInfo.classList.remove("hidden");
 
   }
+
 
   if(method === "in_person"){
 
@@ -676,9 +929,9 @@ function updatePaymentDetails(){
 }
 
 
-/* ================================
-   AUTH STATE
-================================ */
+/* =========================================
+   AUTH
+========================================= */
 
 async function checkUser(){
 
@@ -687,11 +940,14 @@ async function checkUser(){
       session
     }
   } =
-    await supabaseClient.auth.getSession();
+  await supabaseClient.auth.getSession();
+
 
   if(session){
 
-    showLoggedIn(session.user);
+    showLoggedIn(
+      session.user
+    );
 
   }else{
 
@@ -767,131 +1023,178 @@ function showLoggedOut(){
 }
 
 
-/* ================================
+/* =========================================
    SIGN IN
-================================ */
+========================================= */
 
 document
-  .getElementById("loginForm")
-  .addEventListener(
-    "submit",
-    async function(e){
+.getElementById("loginForm")
+.addEventListener(
+  "submit",
+  async function(e){
 
-      e.preventDefault();
+    e.preventDefault();
 
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim();
 
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
+    const email =
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim();
 
-      const errorBox =
-        document
-          .getElementById("loginError");
 
-      errorBox.classList.add("hidden");
+    const password =
+      document
+        .getElementById("loginPassword")
+        .value;
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
 
-      if(error){
+    const errorBox =
+      document.getElementById(
+        "loginError"
+      );
 
-        errorBox.textContent =
-          error.message;
 
-        errorBox.classList.remove("hidden");
+    errorBox.classList.add(
+      "hidden"
+    );
 
-        return;
-      }
 
-      showLoggedIn(data.user);
+    const {
+      data,
+      error
+    } =
+    await supabaseClient.auth
+      .signInWithPassword({
+
+        email,
+        password
+
+      });
+
+
+    if(error){
+
+      errorBox.textContent =
+        error.message;
+
+      errorBox.classList.remove(
+        "hidden"
+      );
+
+      return;
 
     }
-  );
 
 
-/* ================================
+    showLoggedIn(
+      data.user
+    );
+
+  }
+);
+
+
+/* =========================================
    CREATE ACCOUNT
-================================ */
+========================================= */
 
 document
-  .getElementById("signupForm")
-  .addEventListener(
-    "submit",
-    async function(e){
+.getElementById("signupForm")
+.addEventListener(
+  "submit",
+  async function(e){
 
-      e.preventDefault();
+    e.preventDefault();
 
-      const email =
-        document
-          .getElementById("signupEmail")
-          .value
-          .trim();
 
-      const password =
-        document
-          .getElementById("signupPassword")
-          .value;
+    const email =
+      document
+        .getElementById("signupEmail")
+        .value
+        .trim();
 
-      const messageBox =
-        document
-          .getElementById("signupMessage");
 
-      const errorBox =
-        document
-          .getElementById("signupError");
+    const password =
+      document
+        .getElementById("signupPassword")
+        .value;
 
-      messageBox.classList.add("hidden");
-      errorBox.classList.add("hidden");
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.signUp({
-          email,
-          password
-        });
+    const messageBox =
+      document.getElementById(
+        "signupMessage"
+      );
 
-      if(error){
 
-        errorBox.textContent =
-          error.message;
+    const errorBox =
+      document.getElementById(
+        "signupError"
+      );
 
-        errorBox.classList.remove("hidden");
 
-        return;
-      }
+    messageBox.classList.add(
+      "hidden"
+    );
 
-      messageBox.textContent =
-        "Account created. Check your email if email confirmation is enabled.";
+    errorBox.classList.add(
+      "hidden"
+    );
 
-      messageBox.classList.remove("hidden");
 
-      if(data.session){
+    const {
+      data,
+      error
+    } =
+    await supabaseClient.auth
+      .signUp({
 
-        showLoggedIn(data.user);
+        email,
+        password
 
-      }
+      });
+
+
+    if(error){
+
+      errorBox.textContent =
+        error.message;
+
+      errorBox.classList.remove(
+        "hidden"
+      );
+
+      return;
 
     }
-  );
 
 
-/* ================================
+    messageBox.textContent =
+      data.session
+      ? "Account created successfully."
+      : "Account created. Check your email to confirm your account.";
+
+
+    messageBox.classList.remove(
+      "hidden"
+    );
+
+
+    if(data.session){
+
+      showLoggedIn(
+        data.user
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================
    SIGN OUT
-================================ */
+========================================= */
 
 async function signOut(){
 
@@ -899,198 +1202,273 @@ async function signOut(){
 
   showLoggedOut();
 
-  window.location.hash =
-    "account";
-
 }
 
 
-/* ================================
+/* =========================================
    BOOKING
-================================ */
+========================================= */
 
 document
-  .getElementById("bookingForm")
-  .addEventListener(
-    "submit",
-    async function(e){
+.getElementById("bookingForm")
+.addEventListener(
+  "submit",
+  async function(e){
 
-      e.preventDefault();
+    e.preventDefault();
 
-      const messageBox =
-        document
-          .getElementById("bookingMessage");
 
-      const errorBox =
-        document
-          .getElementById("bookingError");
+    const messageBox =
+      document.getElementById(
+        "bookingMessage"
+      );
 
-      messageBox.classList.add("hidden");
-      errorBox.classList.add("hidden");
+    const errorBox =
+      document.getElementById(
+        "bookingError"
+      );
 
-      const {
-        data:{
-          user
-        }
-      } =
-        await supabaseClient.auth.getUser();
 
-      if(!user){
+    messageBox.classList.add(
+      "hidden"
+    );
 
-        errorBox.textContent =
-          "Please sign in before booking.";
+    errorBox.classList.add(
+      "hidden"
+    );
 
-        errorBox.classList.remove("hidden");
 
-        return;
+    const {
+      data:{
+        user
       }
+    } =
+    await supabaseClient.auth
+      .getUser();
 
-      const service =
-        document.getElementById("service");
 
-      const selectedService =
-        service.options[service.selectedIndex];
+    if(!user){
 
-      const price =
-        Number(
-          selectedService.dataset.price
-        );
+      errorBox.textContent =
+        "Please sign in before booking.";
 
-      const paymentMethod =
-        document.getElementById("paymentMethod")
-          .value;
+      errorBox.classList.remove(
+        "hidden"
+      );
 
-      const booking = {
+      return;
 
-        user_id:user.id,
+    }
 
-        name:
-          document
-            .getElementById("bookingName")
-            .value
-            .trim(),
 
-        phone:
-          document
-            .getElementById("bookingPhone")
-            .value
-            .trim(),
+    const service =
+      document.getElementById(
+        "service"
+      );
 
-        address:
-          document
-            .getElementById("bookingAddress")
-            .value
-            .trim(),
 
-        service:
-          service.value,
+    const selected =
+      service.options[
+        service.selectedIndex
+      ];
 
-        price:price,
 
-        appointment_date:
-          document
-            .getElementById("appointmentDate")
-            .value,
+    const price =
+      Number(
+        selected.dataset.price
+      );
 
-        appointment_time:
-          document
-            .getElementById("appointmentTime")
-            .value,
 
-        payment_method:
-          paymentMethod,
+    const paymentMethod =
+      document.getElementById(
+        "paymentMethod"
+      ).value;
 
-        payment_status:
-          "unpaid",
 
-        booking_status:
-          "pending"
+    const booking = {
 
-      };
+      user_id:
+        user.id,
 
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("bookings")
-          .insert(booking);
+      name:
+        document
+          .getElementById(
+            "bookingName"
+          )
+          .value
+          .trim(),
 
-      if(error){
+      phone:
+        document
+          .getElementById(
+            "bookingPhone"
+          )
+          .value
+          .trim(),
 
-        errorBox.textContent =
-          error.message;
+      address:
+        document
+          .getElementById(
+            "bookingAddress"
+          )
+          .value
+          .trim(),
 
-        errorBox.classList.remove("hidden");
+      service:
+        service.value,
 
-        return;
-      }
+      price:
+        price,
 
-      messageBox.innerHTML =
-        paymentMethod === "cash_app"
+      appointment_date:
+        document
+          .getElementById(
+            "appointmentDate"
+          )
+          .value,
 
-        ?
+      appointment_time:
+        document
+          .getElementById(
+            "appointmentTime"
+          )
+          .value,
 
-        `
-        <strong>Appointment request sent!</strong>
+      payment_method:
+        paymentMethod,
+
+      payment_status:
+        "unpaid",
+
+      booking_status:
+        "pending"
+
+    };
+
+
+    const {
+      error
+    } =
+    await supabaseClient
+      .from("bookings")
+      .insert(booking);
+
+
+    if(error){
+
+      errorBox.textContent =
+        error.message;
+
+      errorBox.classList.remove(
+        "hidden"
+      );
+
+      return;
+
+    }
+
+
+    if(paymentMethod === "cash_app"){
+
+      messageBox.innerHTML = `
+
+        <strong>
+          Appointment request sent!
+        </strong>
 
         <br><br>
 
         Send exactly
-        <strong>$${price.toFixed(2)}</strong>
+
+        <strong>
+          $${price.toFixed(2)}
+        </strong>
+
         to
-        <strong>$Txaaden</strong>
+
+        <strong>
+          $Txaaden
+        </strong>
+
         on Cash App.
-
-        <br><br>
-
-        Your payment will remain pending until
-        A2 Outdoor Services verifies it.
 
         <br><br>
 
         <button
           type="button"
           class="btn"
-          onclick="openCashApp()">
+          onclick="openCashApp()"
+        >
           Open Cash App
         </button>
-        `
-
-        :
-
-        `
-        <strong>Appointment request sent!</strong>
 
         <br><br>
 
-        You selected:
-        <strong>Pay In Person After Work</strong>.
+        <span class="small">
+          Your payment will stay pending until
+          A2 Outdoor Services verifies it.
+        </span>
+
+      `;
+
+    }else{
+
+      messageBox.innerHTML = `
+
+        <strong>
+          Appointment request sent!
+        </strong>
+
+        <br><br>
+
+        You selected
+        <strong>
+          Pay In Person After Work
+        </strong>.
 
         <br><br>
 
         Amount due:
-        <strong>$${price.toFixed(2)}</strong>
-        `;
 
-      messageBox.classList.remove("hidden");
+        <strong>
+          $${price.toFixed(2)}
+        </strong>
 
-      document
-        .getElementById("bookingForm")
-        .reset();
-
-      document
-        .getElementById("paymentDetails")
-        .classList.add("hidden");
-
-      loadCustomerBookings();
+      `;
 
     }
-  );
 
 
-/* ================================
+    messageBox.classList.remove(
+      "hidden"
+    );
+
+
+    document
+      .getElementById(
+        "bookingForm"
+      )
+      .reset();
+
+
+    document
+      .getElementById(
+        "paymentDetails"
+      )
+      .classList.add(
+        "hidden"
+      );
+
+
+    loadCustomerBookings();
+
+  }
+);
+
+
+/* =========================================
    CUSTOMER BOOKINGS
-================================ */
+========================================= */
 
 async function loadCustomerBookings(){
 
@@ -1099,34 +1477,49 @@ async function loadCustomerBookings(){
       user
     }
   } =
-    await supabaseClient.auth.getUser();
+  await supabaseClient.auth
+    .getUser();
+
 
   if(!user) return;
+
 
   const container =
     document.getElementById(
       "customerBookings"
     );
 
+
   const {
     data,
     error
   } =
-    await supabaseClient
-      .from("bookings")
-      .select("*")
-      .eq("user_id",user.id)
-      .order("created_at",{
+  await supabaseClient
+    .from("bookings")
+    .select("*")
+    .eq(
+      "user_id",
+      user.id
+    )
+    .order(
+      "created_at",
+      {
         ascending:false
-      });
+      }
+    );
+
 
   if(error){
 
     container.innerHTML =
-      `<div class="error">${escapeHtml(error.message)}</div>`;
+      `<div class="error">
+        ${escapeHtml(error.message)}
+      </div>`;
 
     return;
+
   }
+
 
   if(!data.length){
 
@@ -1134,63 +1527,100 @@ async function loadCustomerBookings(){
       "<p>No bookings yet.</p>";
 
     return;
+
   }
 
+
   container.innerHTML =
-    data.map(booking => `
+    data.map(
+      booking => `
 
       <div class="booking">
 
         <h3>
-          ${escapeHtml(booking.service)}
+          ${escapeHtml(
+            booking.service
+          )}
         </h3>
 
         <p>
-          <strong>Price:</strong>
-          $${Number(booking.price).toFixed(2)}
+          <strong>
+            Price:
+          </strong>
+          $${Number(
+            booking.price
+          ).toFixed(2)}
         </p>
 
         <p>
-          <strong>Date:</strong>
-          ${escapeHtml(booking.appointment_date)}
+          <strong>
+            Date:
+          </strong>
+          ${escapeHtml(
+            booking.appointment_date
+          )}
         </p>
 
         <p>
-          <strong>Time:</strong>
-          ${escapeHtml(booking.appointment_time)}
+          <strong>
+            Time:
+          </strong>
+          ${escapeHtml(
+            booking.appointment_time
+          )}
         </p>
 
         <p>
-          <strong>Payment:</strong>
-          ${booking.payment_method === "cash_app"
+          <strong>
+            Payment:
+          </strong>
+
+          ${
+            booking.payment_method ===
+            "cash_app"
+
             ? "Cash App — $Txaaden"
-            : "Pay In Person"}
+
+            : "Pay In Person"
+          }
+
         </p>
 
         <p>
-          <strong>Payment Status:</strong>
+          <strong>
+            Payment Status:
+          </strong>
+
           <span class="status">
-            ${escapeHtml(booking.payment_status)}
+            ${escapeHtml(
+              booking.payment_status
+            )}
           </span>
         </p>
 
         <p>
-          <strong>Booking Status:</strong>
+          <strong>
+            Booking Status:
+          </strong>
+
           <span class="status">
-            ${escapeHtml(booking.booking_status)}
+            ${escapeHtml(
+              booking.booking_status
+            )}
           </span>
         </p>
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
-/* ================================
+/* =========================================
    REVIEWS
-================================ */
+========================================= */
 
 async function loadReviews(){
 
@@ -1199,24 +1629,33 @@ async function loadReviews(){
       "reviewsList"
     );
 
+
   const {
     data,
     error
   } =
-    await supabaseClient
-      .from("reviews")
-      .select("*")
-      .order("created_at",{
+  await supabaseClient
+    .from("reviews")
+    .select("*")
+    .order(
+      "created_at",
+      {
         ascending:false
-      });
+      }
+    );
+
 
   if(error){
 
     container.innerHTML =
-      `<div class="error">${escapeHtml(error.message)}</div>`;
+      `<div class="error">
+        ${escapeHtml(error.message)}
+      </div>`;
 
     return;
+
   }
+
 
   if(!data.length){
 
@@ -1224,206 +1663,298 @@ async function loadReviews(){
       "<p>No reviews yet.</p>";
 
     return;
+
   }
 
+
   container.innerHTML =
-    data.map(review => `
+    data.map(
+      review => `
 
       <div class="review">
 
         <div class="stars">
-          ${"★".repeat(review.stars)}
-          ${"☆".repeat(5-review.stars)}
+
+          ${
+            "★".repeat(
+              review.stars
+            )
+          }
+
+          ${
+            "☆".repeat(
+              5-review.stars
+            )
+          }
+
         </div>
 
         <h3>
-          ${escapeHtml(review.name)}
+          ${escapeHtml(
+            review.name
+          )}
         </h3>
 
         <p>
-          ${escapeHtml(review.review_text)}
+          ${escapeHtml(
+            review.review_text
+          )}
         </p>
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
 document
-  .getElementById("reviewForm")
-  .addEventListener(
-    "submit",
-    async function(e){
+.getElementById("reviewForm")
+.addEventListener(
+  "submit",
+  async function(e){
 
-      e.preventDefault();
+    e.preventDefault();
 
-      const {
-        data:{
-          user
-        }
-      } =
-        await supabaseClient.auth.getUser();
 
-      if(!user) return;
-
-      const messageBox =
-        document.getElementById(
-          "reviewMessage"
-        );
-
-      const errorBox =
-        document.getElementById(
-          "reviewError"
-        );
-
-      messageBox.classList.add("hidden");
-      errorBox.classList.add("hidden");
-
-      const {
-        error
-      } =
-        await supabaseClient
-          .from("reviews")
-          .insert({
-
-            user_id:user.id,
-
-            name:
-              document
-                .getElementById("reviewName")
-                .value
-                .trim(),
-
-            stars:
-              Number(
-                document
-                  .getElementById("reviewStars")
-                  .value
-              ),
-
-            review_text:
-              document
-                .getElementById("reviewText")
-                .value
-                .trim()
-
-          });
-
-      if(error){
-
-        errorBox.textContent =
-          error.message;
-
-        errorBox.classList.remove("hidden");
-
-        return;
+    const {
+      data:{
+        user
       }
+    } =
+    await supabaseClient.auth
+      .getUser();
 
-      messageBox.textContent =
-        "Thanks! Your review was submitted.";
 
-      messageBox.classList.remove("hidden");
+    if(!user) return;
 
-      document
-        .getElementById("reviewForm")
-        .reset();
 
-      loadReviews();
+    const messageBox =
+      document.getElementById(
+        "reviewMessage"
+      );
+
+    const errorBox =
+      document.getElementById(
+        "reviewError"
+      );
+
+
+    messageBox.classList.add(
+      "hidden"
+    );
+
+    errorBox.classList.add(
+      "hidden"
+    );
+
+
+    const {
+      error
+    } =
+    await supabaseClient
+      .from("reviews")
+      .insert({
+
+        user_id:
+          user.id,
+
+        name:
+          document
+            .getElementById(
+              "reviewName"
+            )
+            .value
+            .trim(),
+
+        stars:
+          Number(
+            document
+              .getElementById(
+                "reviewStars"
+              )
+              .value
+          ),
+
+        review_text:
+          document
+            .getElementById(
+              "reviewText"
+            )
+            .value
+            .trim()
+
+      });
+
+
+    if(error){
+
+      errorBox.textContent =
+        error.message;
+
+      errorBox.classList.remove(
+        "hidden"
+      );
+
+      return;
 
     }
-  );
 
 
-/* ================================
+    messageBox.textContent =
+      "Thanks! Your review was submitted.";
+
+    messageBox.classList.remove(
+      "hidden"
+    );
+
+
+    document
+      .getElementById(
+        "reviewForm"
+      )
+      .reset();
+
+
+    loadReviews();
+
+  }
+);
+
+
+/* =========================================
    OWNER LOGIN
-================================ */
+========================================= */
 
 let ownerClicks = 0;
 
+
 document
-  .querySelector(".logo")
-  .addEventListener(
-    "click",
-    async function(){
+.getElementById("ownerTrigger")
+.addEventListener(
+  "click",
+  async function(){
 
-      ownerClicks++;
+    ownerClicks++;
 
-      if(ownerClicks >= 5){
 
-        ownerClicks = 0;
+    if(ownerClicks < 5){
 
-        const email =
-          prompt("Owner email:");
-
-        const password =
-          prompt("Owner password:");
-
-        if(!email || !password)
-          return;
-
-        const {
-          data,
-          error
-        } =
-          await supabaseClient.auth.signInWithPassword({
-            email,
-            password
-          });
-
-        if(error){
-
-          alert(error.message);
-
-          return;
-        }
-
-        const {
-          data:owner,
-          error:ownerError
-        } =
-          await supabaseClient
-            .from("owner_access")
-            .select("user_id")
-            .eq("user_id",data.user.id)
-            .maybeSingle();
-
-        if(ownerError || !owner){
-
-          alert(
-            "This account is not authorized as an owner."
-          );
-
-          await supabaseClient.auth.signOut();
-
-          return;
-        }
-
-        document
-          .getElementById("owner")
-          .classList.remove("hidden");
-
-        document
-          .getElementById("ownerEmail")
-          .textContent =
-            data.user.email;
-
-        loadOwnerBookings();
-
-        document
-          .getElementById("owner")
-          .scrollIntoView();
-
-      }
+      return;
 
     }
-  );
 
 
-/* ================================
+    ownerClicks = 0;
+
+
+    const email =
+      prompt(
+        "Owner email:"
+      );
+
+
+    const password =
+      prompt(
+        "Owner password:"
+      );
+
+
+    if(!email || !password){
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+    await supabaseClient.auth
+      .signInWithPassword({
+
+        email,
+        password
+
+      });
+
+
+    if(error){
+
+      alert(
+        error.message
+      );
+
+      return;
+
+    }
+
+
+    const {
+      data:owner,
+      error:ownerError
+    } =
+    await supabaseClient
+      .from("owner_access")
+      .select("user_id")
+      .eq(
+        "user_id",
+        data.user.id
+      )
+      .maybeSingle();
+
+
+    if(ownerError || !owner){
+
+      alert(
+        "This account is not authorized as an owner."
+      );
+
+
+      await supabaseClient.auth
+        .signOut();
+
+
+      return;
+
+    }
+
+
+    document
+      .getElementById(
+        "owner"
+      )
+      .classList.remove(
+        "hidden"
+      );
+
+
+    document
+      .getElementById(
+        "ownerEmail"
+      )
+      .textContent =
+        data.user.email;
+
+
+    loadOwnerBookings();
+
+
+    document
+      .getElementById(
+        "owner"
+      )
+      .scrollIntoView();
+
+  }
+);
+
+
+/* =========================================
    OWNER BOOKINGS
-================================ */
+========================================= */
 
 async function loadOwnerBookings(){
 
@@ -1432,24 +1963,33 @@ async function loadOwnerBookings(){
       "ownerBookings"
     );
 
+
   const {
     data,
     error
   } =
-    await supabaseClient
-      .from("bookings")
-      .select("*")
-      .order("created_at",{
+  await supabaseClient
+    .from("bookings")
+    .select("*")
+    .order(
+      "created_at",
+      {
         ascending:false
-      });
+      }
+    );
+
 
   if(error){
 
     container.innerHTML =
-      `<div class="error">${escapeHtml(error.message)}</div>`;
+      `<div class="error">
+        ${escapeHtml(error.message)}
+      </div>`;
 
     return;
+
   }
+
 
   if(!data.length){
 
@@ -1457,65 +1997,120 @@ async function loadOwnerBookings(){
       "<p>No bookings yet.</p>";
 
     return;
+
   }
 
+
   container.innerHTML =
-    data.map(booking => `
+    data.map(
+      booking => `
 
       <div class="booking">
 
         <h3>
-          ${escapeHtml(booking.service)}
+          ${escapeHtml(
+            booking.service
+          )}
         </h3>
 
         <p>
-          <strong>Customer:</strong>
-          ${escapeHtml(booking.name)}
+          <strong>
+            Customer:
+          </strong>
+
+          ${escapeHtml(
+            booking.name
+          )}
         </p>
 
         <p>
-          <strong>Phone:</strong>
-          ${escapeHtml(booking.phone)}
+          <strong>
+            Phone:
+          </strong>
+
+          ${escapeHtml(
+            booking.phone
+          )}
         </p>
 
         <p>
-          <strong>Address:</strong>
-          ${escapeHtml(booking.address)}
+          <strong>
+            Address:
+          </strong>
+
+          ${escapeHtml(
+            booking.address
+          )}
         </p>
 
         <p>
-          <strong>Date:</strong>
-          ${escapeHtml(booking.appointment_date)}
+          <strong>
+            Date:
+          </strong>
+
+          ${escapeHtml(
+            booking.appointment_date
+          )}
         </p>
 
         <p>
-          <strong>Time:</strong>
-          ${escapeHtml(booking.appointment_time)}
+          <strong>
+            Time:
+          </strong>
+
+          ${escapeHtml(
+            booking.appointment_time
+          )}
         </p>
 
         <p>
-          <strong>Amount:</strong>
-          $${Number(booking.price).toFixed(2)}
+          <strong>
+            Amount:
+          </strong>
+
+          $${Number(
+            booking.price
+          ).toFixed(2)}
+
         </p>
 
         <p>
-          <strong>Payment Method:</strong>
-          ${booking.payment_method === "cash_app"
+          <strong>
+            Payment Method:
+          </strong>
+
+          ${
+            booking.payment_method ===
+            "cash_app"
+
             ? "Cash App — $Txaaden"
-            : "Pay In Person"}
+
+            : "Pay In Person"
+          }
+
         </p>
 
         <p>
-          <strong>Payment Status:</strong>
+          <strong>
+            Payment Status:
+          </strong>
+
           <span class="status">
-            ${escapeHtml(booking.payment_status)}
+            ${escapeHtml(
+              booking.payment_status
+            )}
           </span>
         </p>
 
         <p>
-          <strong>Booking Status:</strong>
+          <strong>
+            Booking Status:
+          </strong>
+
           <span class="status">
-            ${escapeHtml(booking.booking_status)}
+            ${escapeHtml(
+              booking.booking_status
+            )}
           </span>
         </p>
 
@@ -1523,66 +2118,82 @@ async function loadOwnerBookings(){
 
         <button
           class="btn"
-          onclick="markPaymentPaid('${booking.id}')">
+          onclick="markPaymentPaid('${booking.id}')"
+        >
           Mark Payment Paid
         </button>
 
         <button
           class="btn"
-          onclick="updateBookingStatus('${booking.id}','confirmed')">
+          onclick="updateBookingStatus('${booking.id}','confirmed')"
+        >
           Confirm Booking
         </button>
 
         <button
           class="btn"
-          onclick="updateBookingStatus('${booking.id}','completed')">
+          onclick="updateBookingStatus('${booking.id}','completed')"
+        >
           Completed
         </button>
 
         <button
           class="btn danger"
-          onclick="updateBookingStatus('${booking.id}','cancelled')">
+          onclick="updateBookingStatus('${booking.id}','cancelled')"
+        >
           Cancel
         </button>
 
       </div>
 
-    `).join("");
+      `
+    ).join("");
 
 }
 
 
-/* ================================
-   OWNER PAYMENT UPDATE
-================================ */
+/* =========================================
+   MARK PAYMENT PAID
+========================================= */
 
 async function markPaymentPaid(id){
 
   const {
     error
   } =
-    await supabaseClient
-      .from("bookings")
-      .update({
-        payment_status:"paid"
-      })
-      .eq("id",id);
+  await supabaseClient
+    .from("bookings")
+    .update({
+
+      payment_status:
+        "paid"
+
+    })
+    .eq(
+      "id",
+      id
+    );
+
 
   if(error){
 
-    alert(error.message);
+    alert(
+      error.message
+    );
 
     return;
+
   }
+
 
   loadOwnerBookings();
 
 }
 
 
-/* ================================
-   OWNER BOOKING STATUS
-================================ */
+/* =========================================
+   UPDATE BOOKING STATUS
+========================================= */
 
 async function updateBookingStatus(
   id,
@@ -1592,61 +2203,96 @@ async function updateBookingStatus(
   const {
     error
   } =
-    await supabaseClient
-      .from("bookings")
-      .update({
-        booking_status:status
-      })
-      .eq("id",id);
+  await supabaseClient
+    .from("bookings")
+    .update({
+
+      booking_status:
+        status
+
+    })
+    .eq(
+      "id",
+      id
+    );
+
 
   if(error){
 
-    alert(error.message);
+    alert(
+      error.message
+    );
 
     return;
+
   }
+
 
   loadOwnerBookings();
 
 }
 
 
-/* ================================
+/* =========================================
    OWNER SIGN OUT
-================================ */
+========================================= */
 
 async function ownerSignOut(){
 
-  await supabaseClient.auth.signOut();
+  await supabaseClient.auth
+    .signOut();
+
 
   document
-    .getElementById("owner")
-    .classList.add("hidden");
+    .getElementById(
+      "owner"
+    )
+    .classList.add(
+      "hidden"
+    );
+
 
   showLoggedOut();
 
 }
 
 
-/* ================================
-   SECURITY / HTML ESCAPE
-================================ */
+/* =========================================
+   ESCAPE HTML
+========================================= */
 
 function escapeHtml(value){
 
-  return String(value ?? "")
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  return String(
+    value ?? ""
+  )
+  .replaceAll(
+    "&",
+    "&amp;"
+  )
+  .replaceAll(
+    "<",
+    "&lt;"
+  )
+  .replaceAll(
+    ">",
+    "&gt;"
+  )
+  .replaceAll(
+    '"',
+    "&quot;"
+  )
+  .replaceAll(
+    "'",
+    "&#039;"
+  );
 
 }
 
 
-/* ================================
+/* =========================================
    INITIAL LOAD
-================================ */
+========================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -1660,16 +2306,19 @@ document.addEventListener(
 );
 
 
-/* ================================
+/* =========================================
    AUTH LISTENER
-================================ */
+========================================= */
 
-supabaseClient.auth.onAuthStateChange(
+supabaseClient.auth
+.onAuthStateChange(
   function(event,session){
 
     if(session){
 
-      showLoggedIn(session.user);
+      showLoggedIn(
+        session.user
+      );
 
     }else{
 
